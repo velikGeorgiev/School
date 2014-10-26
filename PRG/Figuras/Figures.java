@@ -3,14 +3,13 @@ package javaexercises4;
 import java.util.Scanner;
 
 /**
- * La clase 
- * @author velko
+ * El programa dibuja varias figuras segun las especificaciones del usuario.
+ * @author Velik Georgiev Chelebiev
+ * @version 0.0.2
  */
 public class Figures {
         
-    /**
-     * Un programa para dibujar varias figuras segun las especificaciones del usuario.
-     * 
+    /** 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -134,6 +133,13 @@ public class Figures {
     }
 }
 
+/**
+ * Clase dedicada a dibujar figuras en la pantalla del terminal.
+ * OJO: La clase dibuja directamente no realiza returns con los resultados
+ * 
+ * @author Velik Georrgiev Chelebiev
+ * @version 0.0.1
+ */
 class FigureDraw {
     
     // El caracter con el que se dibujara la figura
@@ -147,6 +153,8 @@ class FigureDraw {
     }
     
     /**
+     * El constructor asigna los caracteres que se utilizaran para dibujar
+     * las figuras.
      * 
      * @param figureChar El caracter con el que se dibujara la figura
      * @param backgroundChar El caractecter que dibujara el vacio/fondo
