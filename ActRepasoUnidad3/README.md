@@ -10,8 +10,7 @@ responderá  que  el  número  más  cercano  al  2  es  el  1
 <h5>02</h5>
 Diseña  un  programa  que  muestre  la  tabla  ASCII  desde  su  elemento  de  código  
 numérico   32   hasta   el   de   código   numérico   126.   En   la   tabla   se   mostrarán   los  
-códig
-os  ASCII,  además  de  las  respectivas  representaciones  como  caracteres  de  
+códigos  ASCII,  además  de  las  respectivas  representaciones  como  caracteres  de  
 sus  elementos.
 
 <h5>03</h5>
