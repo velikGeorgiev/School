@@ -1,0 +1,22 @@
+.data
+arr: .word 0x2, 0x20, 0x30, 0x4, 0x7, 0x0
+
+.text
+.globl main
+main:
+la $t1, arr
+addi $t5, $0, 0 # se guardara la suma de todos los numeros
+addi $t7, $0, 0 # se guardara el numero mas alto
+
+loop:
+lw $t2, ($t1)
+add $t5, $t5, $t2
+slt $4,$t2,$t7;
+beq $t4 
+addi $t1, $t1, 4
+lw $t3, ($t1)
+bne $t3, $0, loop
+
+
+newLoop:
+addi $t4, $0, 1
