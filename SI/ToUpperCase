@@ -1,0 +1,16 @@
+.data
+        hola: .asciiz "hola mundo" 
+
+ .text
+ .globl main
+main:
+        addi $t2, $0, 0xDF
+        la $t3, hola
+
+loop:
+        lb $t4, ($t3) # leemos el caracter
+        and $t4, $t2, $t4 #convertimos en mayus.
+        sb $t4, ($t3) # guardamos el nuevo valor en memoria
+        addi $t3, $t3, 0x01 # pasamos al siguiente caracter 
+        lb $t7, ($t3) # cargamos el siguiente caracter
+        bne $t7, $0, loop # si el siguiente caracter no es vacio repetimos
