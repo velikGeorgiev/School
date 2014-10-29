@@ -110,10 +110,6 @@
 				var pageObj = document.getElementById("content" + pageName);
 				var menuObj = document.getElementById("menu" + pageName);
 				
-				if(currentPageObj == pageObj) {
-					return;
-				}				
-				
 				if (currentPageObj == null) {
 					currentPageObj = document.getElementById("content" + defaultPage);
 					currentMenuObj = document.getElementById("menu" + defaultPage);
