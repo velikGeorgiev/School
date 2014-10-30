@@ -38,7 +38,7 @@ public class Ejercicio1_VelikGeorgiev {
             /**
              * Convertimos el numero en cadena de caracteres
              * para poder trabajar mas facilmente y con menos
-             * interacciones.
+             * interacciones, bocles etc.
              */
             String numeroCadena = String.valueOf(num);
             
