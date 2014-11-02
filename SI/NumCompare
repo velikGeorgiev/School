@@ -1,5 +1,5 @@
 .data
-arr: .word 0x2, 0x20, 0x30, 0x4, 0x7, 0x0
+arr: .word 0x2, 0x20, 0x30, 0x4, 0x7, 0x31, 0x0
 
 .text
 .globl main
@@ -11,12 +11,26 @@ addi $t7, $0, 0 # se guardara el numero mas alto
 loop:
 lw $t2, ($t1)
 add $t5, $t5, $t2
-slt $4,$t2,$t7;
-beq $t4 
 addi $t1, $t1, 4
 lw $t3, ($t1)
 bne $t3, $0, loop
 
+la $t1, arr
 
-newLoop:
-addi $t4, $0, 1
+compareLoop:
+lw $t2, ($t1)
+slt $t4, $t2, $t7
+beq $t4, $0, assign
+addi $t1, $t1, 4
+lw $t3, ($t1)
+bne $t3, $0, compareLoop
+beq $0, $0, end
+
+assign:
+add $t7, $0, $t2
+addi $t1, $t1, 4
+lw $t3, ($t1)
+bne $t3, $0, compareLoop
+
+end:
+addi $t4, $0, 0
