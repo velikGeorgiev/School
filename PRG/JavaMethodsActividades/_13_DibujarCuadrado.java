@@ -1,8 +1,11 @@
 package EjercicionsTema04;
 
 /**
- *
- * @author velko
+ * El programa dibuja un cuadrado con dimensiones
+ * indicadas.
+ * 
+ * @author Velik Georgiev Chelebiev
+ * @version 0.0.1
  */
 public class _13_DibujarCuadrado {
 

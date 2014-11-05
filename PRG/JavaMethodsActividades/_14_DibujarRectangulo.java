@@ -1,8 +1,11 @@
 package EjercicionsTema04;
 
 /**
- *
- * @author velko
+ * El programa dibuja por la pantalla del terminal mediante el uso
+ * de caracteres un rectangulo.
+ * 
+ * @author Velik Georgiev Chelebiev
+ * @version 0.0.1
  */
 public class _14_DibujarRectangulo {
 

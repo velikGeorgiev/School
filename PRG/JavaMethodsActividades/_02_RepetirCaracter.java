@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Lee un numero entero y un caracter del terminal introducidos por el usuario.
  * Repite el caracter tantas veces como se le indico.
  * 
- * @author velko
+ * @author Velik Georgiev Chelebiev
  */
 public class _02_RepetirCaracter {
 

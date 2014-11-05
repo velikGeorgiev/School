@@ -1,8 +1,15 @@
 package EjercicionsTema04;
 
 /**
- *
- * @author velko
+ * Este programa es un conjunto de los 3 programas anteriores ( 12,13,14 ).
+ * 
+ * Sobreescribe los metodos segun la necesidad.
+ * El cuadrado 3x3 no necesita parametros
+ * El cuadrado necesita un parametro
+ * El rectangulo BASExALTURA necesita 2 parametros. 
+ * 
+ * @author Velik Georgiev Chelebiev
+ * @version 0.0.1
  */
 public class _12_13_14_Dibujar {
     
@@ -12,33 +19,25 @@ public class _12_13_14_Dibujar {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        dibujarCuadrado3x3();
         imprimirRectangulo(5, 6);
-        dibujarCuadrado(5);
+        imprimirRectangulo(3);
+        imprimirRectangulo(5);
     }
     
     /**
-     * Imprime un cuadrado con dimensiones 3x3.
-     * 
-     * Para ello llama el metodo imprimirRectangulo 
-     * pasandole dos argumentos iguales (altura y base son iguales)
-     */
-    public static void dibujarCuadrado3x3() {
-        int size = 3;
-        
-        imprimirRectangulo(size, size);
-    }
-    
-    /**
-     * Imprime un cuadrado.
-     * 
-     * Para ello llama el metodo imprimirRectangulo 
-     * pasandole dos argumentos iguales (altura y base son iguales)
+     * Imprime en el terminal un cuadrado.
      * 
      * @param size El lado del cuadrado
      */
-    public static void dibujarCuadrado(int size) {
-        imprimirRectangulo(size, size);
+    public static void imprimirRectangulo(int size) {
+        System.out.println(dibujarRectangulo(size, size));
+    }
+    
+    /**
+     * Imprime en el terminal un rectangulo con dimensiones 3x3.
+     */
+    public static void imprimirRectangulo() {
+        System.out.println(dibujarRectangulo(3, 3));
     }
     
     /**

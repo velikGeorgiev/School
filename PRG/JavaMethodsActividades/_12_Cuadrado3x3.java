@@ -1,8 +1,11 @@
 package EjercicionsTema04;
 
 /**
- *
- * @author velko
+ * El programa se encarga de dibujar un cuadrado de dimensiones
+ * fijas 3x3.
+ * 
+ * @author Velik Georgiev Chelebiev
+ * @version 0.0.1
  */
 public class _12_Cuadrado3x3 {
 
