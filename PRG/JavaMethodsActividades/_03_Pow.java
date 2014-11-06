@@ -32,6 +32,18 @@ public class _03_Pow {
         System.out.println("Resultado: " + Math.pow(base, exp));
     }
     
+    /**
+     * Lee una cadena de texto introducida en el terminal por el usuario la parsea
+     * convertiendo la en un DOUBLE.
+     * 
+     * El metodo seguira pediendo un numero al usuario hasta que ingrese un numero
+     * menor que el indicado.
+     *
+     * @param textoAMostrar Texto que se mostrara al usuario para indicale que
+     * le pedimos
+     * @param maximo El numero maximo permitido
+     * @return Devuelve el numero real ( double ) introducido por el usuario
+     */
     public static double leerDoubleDelTerminal(String textoAMostrar, double maximo) {
         double numero = 0;
         
@@ -44,5 +56,22 @@ public class _03_Pow {
 
         
         return numero;
+    }
+    
+    /**
+     * El metodo calcula el resultado de elevar un numero a un exponente.
+     * 
+     * @param base La base numerica
+     * @param exp El exponente
+     * @return Resultado
+     */
+    public static int power(int base, int exp){
+        int result = 1;
+        
+        for(int i = 0; i < exp; i++) {
+            result *= base;
+        }
+        
+        return result;
     }
 }

@@ -17,27 +17,27 @@ public class _01_NumerosOrden {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         
-        System.out.println("Introduce dos numeros separados por coma:");
+        System.out.print("Introduce dos numeros separados por coma: ");
         // Separamos los numeros por coma introducidos por el usuario y los guardamos en un vector
         String[] sequenciaDeNumeros = scan.nextLine().split(",");
         
-        System.out.println("El orden de los numeros es " + ordenDeNumeros(sequenciaDeNumeros));
+        int numA = Integer.parseInt(sequenciaDeNumeros[0]);
+        int numB = Integer.parseInt(sequenciaDeNumeros[1]);
+        
+        System.out.println("El orden de los numeros es " + ordenDeNumeros(numA, numB));
     }
     
     /**
      * Comprueba si dos numeros son ordenados en orden ascendente o descendente.
      * 
-     * @param numeros Los dos numeros en un vector ( el vector no puede tener una capacidad diferente a 2)
+     * @param numA El primer numero
+     * @param numB El segundo numero
      * @return Una cadena con el orden de los numeros o si son iguales devuelve "Iguales"
      */
-    public static String ordenDeNumeros(String[] numeros) {
-        if(numeros.length != 2) {
-            return "*** Error ***";
-        }
-            
-        if(Integer.parseInt(numeros[0]) < Integer.parseInt(numeros[1])) {
+    public static String ordenDeNumeros(int numA, int numB) {            
+        if(numA < numB) {
             return "Ascendente";
-        } else if (Integer.parseInt(numeros[0]) > Integer.parseInt(numeros[1])) {
+        } else if (numA > numB) {
             return "Descendente";
         }
         
