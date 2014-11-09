@@ -6,6 +6,7 @@ import java.util.Scanner;
  * Calcula la diferencia entre dos hora en minutos.
  * 
  * @author Velik Georgiev Chelebiev
+ * @version 0.0.1
  */
 public class _03_DiferenciaMinutos {
 
@@ -15,42 +16,72 @@ public class _03_DiferenciaMinutos {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         
+        // En las siguientes variables se guardaran
+        // las dos horas introducidas por el usuario
+        String primeraHora, segundaHora;
+        
+        // En la siguiente variable se indicara si las horas 
+        // introducidas son correctas
+        boolean horasValidas = true;
+        
         /**
          * Le pedimos al usuario que nos introduzca las dos horas.
          */
-        System.out.print("Introduce la primera hora: ");
-        String primeraHora = scan.nextLine();
-        
-        System.out.print("Introduce la segunda hora: ");
-        String segundaHora = scan.nextLine();
-        
-        /**
-         * Comprobamos si las horas son validas.
-         */
-        if(!validarHora(primeraHora) || !validarHora(segundaHora)) {
-            System.out.println("El formato de la hora no es correcto.");
-            return;
-        }
+        do {
+            System.out.print("Introduce la primera hora: ");
+            primeraHora = scan.nextLine();
+
+            System.out.print("Introduce la segunda hora: ");
+            segundaHora = scan.nextLine();
+            
+            horasValidas = true;
+            
+            /**
+             * Comprobamos si las horas son validas.
+             * Si no los son imprimimos un mensaje de error y le asignamos a la variable
+             * horasValidas el valor FALSE para que el bucle se vuelva a repetir
+             */
+            if(!validarHora(primeraHora) || !validarHora(segundaHora)) {
+                System.out.println("El formato de la hora no es correcto.");
+                horasValidas = false;
+            }
+        } while (!horasValidas);
         
         /**
          * Separamos las horas de los minutos.
          */
         String[] primeraHoraSplit = primeraHora.split(":");
         String[] segundaHoraSplit = segundaHora.split(":");
-        
-        // Calculamos el total minutos de la primera hora
-        int totalMinutosPrimeraHora = (Integer.parseInt(primeraHoraSplit[0]) * 60) + Integer.parseInt(primeraHoraSplit[1]);
-        
-        // Calculamos el total minutos de la segunda hora
-        int totalMinutosSegundaHora = (Integer.parseInt(segundaHoraSplit[0]) * 60) + Integer.parseInt(segundaHoraSplit[1]);
-        
+
         // Calculamos la diferencia
-        int diferencia = Math.abs(totalMinutosPrimeraHora - totalMinutosSegundaHora);
+        int diferencia = minutosDiferencia(primeraHoraSplit, segundaHoraSplit);
         
         // Imprimimos el resultado
         String unidad = (diferencia == 1) ? "min" : "mins";
         
         System.out.println("Diferencia en minutos entre las dos horas: " + diferencia + " " + unidad);
+    }
+    
+    
+    /**
+     * Calcula la diferencia en minutos entre dos horas dadas.
+     * 
+     * @param primeraHora La primera hora
+     * @param segundaHora La segunda hora
+     * @return La diferencia entre las dos horas
+     */
+    public static int minutosDiferencia(String[] primeraHora, String[] segundaHora) {
+        // Calculamos el total minutos de la primera hora
+        int totalMinutosPrimeraHora = (Integer.parseInt(primeraHora[0]) * 60) + Integer.parseInt(primeraHora[1]);
+        
+        // Calculamos el total minutos de la segunda hora
+        int totalMinutosSegundaHora = (Integer.parseInt(segundaHora[0]) * 60) + Integer.parseInt(segundaHora[1]);
+        
+        // Calculamos la diferencia
+        int diferencia = Math.abs(totalMinutosPrimeraHora - totalMinutosSegundaHora);
+        
+        // Devolvemos la diferencia entre ambas horas
+        return diferencia;
     }
     
     /**

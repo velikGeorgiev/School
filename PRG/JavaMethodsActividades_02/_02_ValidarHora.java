@@ -7,6 +7,7 @@ import java.util.Scanner;
  * el usuario tiene un formato correcto.
  * 
  * @author Velik Georgiev Chelebiev
+ * @version 0.0.1
  */
 public class _02_ValidarHora {
 

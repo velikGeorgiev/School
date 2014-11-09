@@ -7,6 +7,7 @@ import java.util.Scanner;
  * Imprime el resultado por la pantalla del terminal.
  * 
  * @author Velik Georgiev Chelebiev
+ * @version 0.0.1
  */
 public class _01_Bisiesto {
 

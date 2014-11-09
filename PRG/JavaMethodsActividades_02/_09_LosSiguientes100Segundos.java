@@ -4,7 +4,9 @@ package JavaMethodsActividades_02;
 import java.util.Scanner;
 
 /**
- *
+ * Muestra los siguientes 100 segundos de una fecha introducida
+ * por el usuario.
+ * 
  * @author Velik Georgiev Chelebiev
  */
 public class _09_LosSiguientes100Segundos {
