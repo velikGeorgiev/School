@@ -112,4 +112,23 @@ public class _08_PasswordGen {
     public static int genNumero() {
         return (new Random().nextInt(10));
     }
+    
+    /**
+     * Genera una cadena de caracteres aleatorios
+     * 
+     * @param length el tamaño de la cadena
+     * @param Cadena compuesta por caracteres aleatorios
+     */
+    public static String fastRandom(int length) {
+        String caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~!@#$%^&*()_+}{:?><>-=][';/.,";
+        StringBuilder resultado = new StringBuilder();
+        
+        for(int i = 0; i < length; i++) {
+            char randChar = caracteres.charAt(new Random().nextInt((caracteres.length() - 1)));
+            
+            resultado.append(randChar);
+        }
+        
+        return resultado.toString();
+    }
 }
