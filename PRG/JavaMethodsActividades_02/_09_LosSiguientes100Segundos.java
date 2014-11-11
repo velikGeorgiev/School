@@ -106,7 +106,7 @@ public class _09_LosSiguientes100Segundos {
          * en el vector definido devolveremos null.
          */
         if(dia < 0 || dia >= diasDeLaSemana.length) {
-            return null;
+            dia = 0;
         }
         
         return diasDeLaSemana[dia];
