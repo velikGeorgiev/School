@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+			
+			.imageContainer > ul {
+				list-style:none; 
+				display:block;
+				white-space:nowrap;
+				margin: 0; padding: 0;
+			}
+			
+			.imageContainer > ul > li {
+				display: inline;
+				width: 144px;
+				margin: 0; padding: 0;
+			 }			
+			
+			.imageContainer > ul > li > img {
+				width: 144px;
+				height: 74px;
+				margin: 0;    
+				line-height: 0;
+			}
+			
+			.imageContainer {
+				width: 144px;
+				height: 74px;
+				overflow: hidden;
+				display: inline-block;
+				border: 1px solid #000;
+			}
+		</style>
+		<script type="text/javascript">
+			var nextPic = 1;
+			
+			function next() {
+				var leftSc = nextPic * 150;
+					
+				if(nextPic >= 2) {
+					nextPic = 0;	
+				} else {
+					nextPic++;
+				}	
+				
+				document.getElementById("imageContainer").scrollLeft = leftSc;
+				document.getElementById("imageContainer").scrollTop = 0;
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="<" onclick="prev();" />
+		<div class="imageContainer" id="imageContainer">
+			<ul>
+				<li><img src="roma.jpg" alt="" /></li>
+				<li><img src="ex.jpg" alt="" /></li>
+				<li><img src="europe.jpeg" alt="" /></li> 
+			</ul>
+		</div>
+		<input type="button" value=">" onclick="next();" />
+	</body>
+</html>
