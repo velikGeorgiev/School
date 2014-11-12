@@ -152,7 +152,7 @@ function ImageSlider() {
         var totalImageItems = $(baseSelector + " > ul > li").length;
 
         $("#dot_" + parentID + "_" + currentImage).css("background-color", "transparent");
-
+alert($(baseSelector).innerWidth());
         /**
          * Comprobamos si se quiere la imagen siguiente o la imagen previa.
          * Segun los requisimos a currentImage le indicamos la imagen
