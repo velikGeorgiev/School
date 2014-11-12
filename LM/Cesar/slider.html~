@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+		</title>
+		<style type="text/css">
+			.container {
+				border: 0px solid #000;
+				width: 300px;
+				height: 200px;
+				border: 2px solid #ff0000;
+				overflow:hidden;
+				display: inline-block;
+				position: relative;
+				}
+			
+				.container > ul { height: 200px; }
+				.container > ul, .container > ul > 	li {
+					list-style:none;
+					margin: 0; padding: 0;
+				}
+				
+				.container > ul > li { position: relative; }
+				
+				.container > ul > li > img {
+					width: 300px;
+					height: 200px;		
+					float: left;
+					}	
+		</style>
+		<script src="jquery.js" /></script>	
+	</head>
+	<body>
+		<input type="button" value="<" onclick="next(false);" />
+		<div class="container"> 
+			<ul>
+				<li><img src="europe.jpeg" alt="" /></li>
+				<li><img src="roma.jpg" alt="" /></li>
+				<li><img src="ex.jpg" alt="" /></li>				
+			</ul>
+		</div>
+		<input type="button" onclick="next(true);" value=">" />
+		
+		<script type="text/javascript" >
+			var currentImage = 1;
+			var animationPlay = false;
+			
+			function next(isNext) {	
+				// Si existe alguna cambio de imagenes en proceso, NO permitimos
+				// hacer otro mientras el activo no termine
+				if(animationPlay == true) return;
+				
+				var currentImageObj = $(".container > ul :nth-child(" + currentImage + ")");
+				var totalImageItems = $(".container > ul > li").length;
+				
+				if(isNext == true) {
+					currentImage = (currentImage >= totalImageItems) ? 1 : currentImage + 1;
+				} else {
+					currentImage = (currentImage <= 1) ? totalImageItems : currentImage - 1;
+				}
+				
+				var nextImageObj = $(".container > ul :nth-child(" + currentImage + ")");
+				
+				/** 
+				 * Propiedas CSS de las imagenes
+				 */
+				var imageSizeHeight = $(".container").css("height");
+				var imageSizeWidth = $(".container").css("width");
+				var imagePositionOnTop = -(currentImage - 1) * 200;
+				
+				// Indica que hay un cambio de imagenes en proceso
+				animationPlay = true;
+				
+				if(isNext == true) {
+					// Escondemos la imagen actual
+					currentImageObj.animate({ "left": "-" + imageSizeWidth }, 1000, "linear");			
+				} else {
+					// Escondemos la imagen actual
+					currentImageObj.animate({ "left": imageSizeWidth }, 1000, "linear");			
+				}
+				
+				/**
+				 * Ajustamos la imagen a mostrar detras de la imagen actual
+				 * despues mediante un efecto liner de transicion la posicionamos
+				 * como imagen actual.
+				 */
+				nextImageObj.css({top: imagePositionOnTop + "px", left: imageSizeWidth });
+				nextImageObj.animate({ 
+						left: "0" 
+					}, 1000, "linear", function() { 
+						// Indicamos que la transicion de imagenes ha terminado
+						animationPlay = false; 
+					}
+				);
+			}
+		</script>
+	</body>
+</html>

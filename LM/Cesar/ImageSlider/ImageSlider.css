@@ -1,0 +1,131 @@
+/**
+ *  The MIT License (MIT)
+ * Copyright (c) 2014 Velik Georgiev Chelebiev
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+body { 
+    background-color: #EBE4DD;
+}
+
+.imageSlider {
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    width: 25%;
+    cursor: default;
+    box-shadow: 8px 8px 8px #888;
+
+    /** No quiero que el texto en el slider sea seleccionable **/
+    /** Deshabilitar la seleccion del texto **/
+    -webkit-user-select: none; /** Para chrome **/
+    -moz-user-select: none; /** firefox **/
+    -ms-user-select: none; /** M$ IE **/
+    -o-user-select: none; /** Opera **/
+    user-select: none; /** Predeterminado **/
+}
+
+.container {
+    border: 0px solid #000;
+    width: 100% !important;
+    height: 250px;
+    overflow:hidden;
+    display: inline-block;
+    position: relative;
+    line-height: 0;
+    }
+
+    .container > ul, .container > ul > li {
+        list-style:none;
+        margin: 0; padding: 0;
+    }
+
+    .container > ul > li { 
+        position: relative; 
+        }
+
+        .container > ul > li > div {
+            line-height: 15px;
+            padding-top: 6px;
+            padding-left: 15px;
+            padding-right: 15px;
+            height: 44px;
+            color: #000;
+            font-family: verdana;
+            font-size: 13px;
+            text-align: center;
+            /** background-color: rgba(255, 206, 145, .8); **/
+            background-image: linear-gradient(#FFF, #D1D1D1);
+            word-break: break-all; // Para que el texto no se salga del contenedor
+        }
+
+        .container > ul > li > img {
+            width: 100% !important; /** La imagen tendra 100% de anchura respecto el contenedor **/
+            height: 199px;		
+            border-bottom: 1px solid #fff;
+        }	
+
+.btn {
+    width: 13%;
+    height: 32.5px;
+    display: inline-block;
+    height: 250px;
+    position: absolute;
+    cursor: pointer;
+    }
+
+    .btn.prev {
+        left: 0%;
+        z-index: 20;
+        }
+
+        .btn.prev:hover {
+            background: url(prev.png) no-repeat 0 50%;
+        }
+
+    .btn.next {
+        left: 87%;
+        top: 0;
+        z-index: 20;
+        }
+
+        .btn.next:hover {
+            background: url(next.png) no-repeat right 50%;
+        }
+
+.dot {
+    border-radius: 100%;
+    border: 1px solid #000;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    margin: 4px;
+}
+
+.counter{
+    position: absolute;
+    z-index: 10;
+    top: 170px;
+    left: 200px;
+    opacity: .5;
+    }
+
+/** Media Querys -> Cambiara solo el width del imageSlider **/
+@media screen and (max-width: 800px) { .imageSlider { width: 60%; } }
+@media screen and (max-width: 600px) { .imageSlider { width: 80%; } }
+@media screen and (max-width: 480px) { .imageSlider { width: 100%; } }
+@media screen and (max-device-width: 360px) { .imageSlider { width: 80%; } } /** Galaxy S4 **/
