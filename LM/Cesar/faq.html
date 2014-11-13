@@ -8,75 +8,112 @@
                 background-color: #F3F3F5; 
                 font-family: "Open Sans",sans-serif;
             }
+            
             ul, li { margin: 0; padding: 0; list-style-type: none; }
-                
-            .faq-menu {
-                background-color: rgba(78, 83, 89, 0.8);
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 200px;
-                z-index: 2;
-            }
             
-            .faq-menu a {
-                display: block;
-                line-height: 50px;
-                color: #fff;
-                text-decoration: none;
-                position: relative;
-                padding-left: 24px;
-                font-size: 14px;
-            }
+            .faq {
+                width: 1000px; 
+                position: relative; 
+                left: 100px; 
+                top: 100px;
+                }
             
-            .faq-menu a:hover {
-                opacity: .7;
-            }
-            
-            .faq-menu .active::before { 
-                display: block;
-                left: 0;
-                height: 100%;
-                width: 5px;
-                background-color: #a9c056;
-                position: absolute;
-                content: "";
-            }
-            
-            .faq-menu.fixed {
-                position: fixed;
-            }
-            
-            .faq-items {
-                padding-left: 250px;
-            }
-            
-            .faq-items .faq-items-group > li {
-                background-color: #fff;
-                box-shadow: 0 1px 10px rgba(108, 125, 142, 0.3);
-                margin-top: 10px;
-            }
-            
-            .faq-items .faq-items-group > li.title {
-                background-color: transparent;
-                box-shadow: none;
-            }
-            
-            .faq-items .faq-items-group > li > a {
-                padding: 24px 0 24px 24px;
-                display: block;
-                color: #A9C056;
-                text-decoration: none;
-                font-size: 25px;
-                font-weight: 300;   
-            }
+                .faq-menu {
+                    background-color: #F0F6FF;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 200px;
+                    z-index: 2;
+                    }
+
+                    .faq-menu a {
+                        display: block;
+                        line-height: 50px;
+                        color: #849EDB;
+                        text-decoration: none;
+                        position: relative;
+                        padding-left: 24px;
+                        font-size: 14px;
+                        }
+
+                        .faq-menu a:hover {
+                            opacity: .7;
+                        }
+
+                        .faq-menu .active {
+                            background-color: #E8F2FF;
+                            /* color: #FFF; */
+                        }
+                    .faq-menu .active::before { 
+                        display: block;
+                        left: 0;
+                        height: 100%;
+                        width: 5px;
+                        background-color: #849EDB;
+                        position: absolute;
+                        content: "";
+                    }
+
+                    .faq-menu.fixed {
+                        position: fixed;
+                    }
+
+                .faq-items {
+                    padding-left: 250px;
+                    }
+
+                    .faq-items .faq-items-group > li {
+                        background-color: #fff;
+                        box-shadow: 0 1px 10px rgba(127, 145, 163, 0.2);
+                        margin-top: 10px;
+                        }  
+                        
+                        .faq-items .faq-items-group > li:hover {
+                            box-shadow: 0 1px 10px rgba(108, 125, 142, 0.3);
+                        }
+
+                        .faq-items .faq-items-group > li.title {
+                            background-color: transparent;
+                            box-shadow: none;
+                            padding-top: 15px;
+                        }
+
+                        .faq-items .faq-items-group > li > a {
+                            padding: 24px 0 24px 24px;
+                            display: block;
+                            color: #3067B0;
+                            text-decoration: none;
+                            font-size: 25px;
+                            font-weight: 300;   
+                        }
+                        
+                        .faq-items .faq-items-group > li > p {
+                            padding: 0 0 20px 20px;
+                            display: none;
+                        }
         </style>
-        <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script> !-->
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                //alert($("faq").offset().top);
+                var allGroups = $(".faq-items-group");
+                                
                 $(window).on("scroll", function(){
                     var top = 20;
+                        
+                    allGroups.each(function() {
+                        var currentItemLimitScroll = $(this).offset().top + $(this).innerHeight();
+                        
+                        
+                        if($(window).scrollTop() < $(".faq-items > ul").first().offset().top) {
+                            $(".faq-menu ul").first().addClass("active");
+                        }else if($(window).scrollTop() >= $(this).offset().top && $(window).scrollTop() < currentItemLimitScroll) {
+                            $(".faq-menu a[href='#" + $(this).attr("id") + "']").addClass("active");
+                        } else {
+                            $(".faq-menu a[href='#" + $(this).attr("id") + "']").removeClass("active");
+                        }
+                    });
                         
                     if(($(".faq").offset().top - top) <= $(window).scrollTop()) {
                         var left = $(".faq .faq-menu").offset().left;
@@ -87,70 +124,168 @@
                         });
                     } else {
                         $(".faq .faq-menu").removeClass('fixed').css({
-				'left': 0,
-				'top': 0,
+                            left: 0,
+                            top: 0,
 			});
                     }
+                });
+                
+                $(".faq > .faq-menu a").on("click", function(event) {
+                    event.preventDefault();
+                    var destination = $(this).attr("href");
+                    var targetItem = $(destination);
+                    
+                    //$(".faq > .faq-menu > li").children("a.active").removeClass("active");
+                    //$(this).addClass("active");
+                    $('body, html').animate({ 'scrollTop': targetItem.offset().top + 5}, 300); 
+                });
+                
+                $(".faq-items-group > li").on("click", function(event) {
+                    event.preventDefault();
+                    //$(this).find("div").css( { display: "block" } );
+                    $(this).css({
+                       // height: ($(this).innerHeight() + $(this).find("div").innerHeight())
+                    });
+            
+                    $(this).find("p").toggle();
                 });
             });
         </script>
     </head>
     <body>
-        <section class="faq" style="width: 1000px; position: relative; left: 100px; top: 100px;">
+        <section class="faq">
             <ul class="faq-menu">
                 <li>
-                    <a href="" title="" class="active">
+                    <a href="#buy" title="" class="active">
                         Compras
                     </a>
                 </li>
                 <li>
-                    <a href="" title="">
+                    <a href="#sells" title="">
                         Privacidad
                     </a>
                 </li>
                 <li>
-                    <a href="" title="">
+                    <a href="#deliver" title="">
                         Entrega
                     </a>
                 </li>
             </ul>
             <div class="faq-items">
-                <ul class="faq-items-group">
+                <ul id="buy" class="faq-items-group">
                     <li class="title">
                         Compras
                     </li>
                     <li>
-                        <a href="" title="">How to change my pass?</a>
+                        <a href="javascript:;" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
                     </li>
                     <li>
-                        <a href="" title="">How to change my pass?</a>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
                     </li>
                     <li>
-                        <a href="" title="">How to change my pass?</a>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
                     </li>
                     <li>
-                        <a href="" title="">How to change my pass?</a>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
                     </li>
                 </ul>
                 
-                <ul class="faq-items-group">
+                <ul class="faq-items-group" id="sells">
                     <li class="title">
                         Ventas
                     </li>
                     <li>
-                        <a href="" title="">How to change my pass?</a>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
                     </li>
                     <li>
-                        <a href="" title="">How to change my pass?</a>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
                     </li>
                     <li>
-                        <a href="" title="">How to change my pass?</a>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
                     </li>
                     <li>
-                        <a href="" title="">How to change my pass?</a>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
                     </li>
                 </ul>
-            </diiv>
+                
+                <ul class="faq-items-group" id="deliver">
+                    <li class="title">
+                        Ventas
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <p>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </p>
+                    </li>
+                </ul>
+            </div>
         </section>
         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            body { 
+                background-color: #F3F3F5; 
+                font-family: "Open Sans",sans-serif;
+            }
+            ul, li { margin: 0; padding: 0; list-style-type: none; }
+                
+            .faq-menu {
+                background-color: rgba(78, 83, 89, 0.8);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 200px;
+                z-index: 2;
+            }
+            
+            .faq-menu a {
+                display: block;
+                line-height: 50px;
+                color: #fff;
+                text-decoration: none;
+                position: relative;
+                padding-left: 24px;
+                font-size: 14px;
+            }
+            
+            .faq-menu a:hover {
+                opacity: .7;
+            }
+            
+            .faq-menu .active::before { 
+                display: block;
+                left: 0;
+                height: 100%;
+                width: 5px;
+                background-color: #a9c056;
+                position: absolute;
+                content: "";
+            }
+            
+            .faq-menu.fixed {
+                position: fixed;
+            }
+            
+            .faq-items {
+                padding-left: 250px;
+            }
+            
+            .faq-items .faq-items-group > li {
+                background-color: #fff;
+                box-shadow: 0 1px 10px rgba(108, 125, 142, 0.3);
+                margin-top: 10px;
+            }
+            
+            .faq-items .faq-items-group > li.title {
+                background-color: transparent;
+                box-shadow: none;
+            }
+            
+            .faq-items .faq-items-group > li > a {
+                padding: 24px 0 24px 24px;
+                display: block;
+                color: #A9C056;
+                text-decoration: none;
+                font-size: 25px;
+                font-weight: 300;   
+            }
+        </style>
+        <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                //alert($("faq").offset().top);
+                $(window).on("scroll", function(){
+                    var top = 20;
+                        
+                    if(($(".faq").offset().top - top) <= $(window).scrollTop()) {
+                        var left = $(".faq .faq-menu").offset().left;
+                        
+                        $(".faq .faq-menu").addClass("fixed").css({
+                            "top": top,
+                            "left": left
+                        });
+                    } else {
+                        $(".faq .faq-menu").removeClass('fixed').css({
+				'left': 0,
+				'top': 0,
+			});
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <section class="faq" style="width: 1000px; position: relative; left: 100px; top: 100px;">
+            <ul class="faq-menu">
+                <li>
+                    <a href="" title="" class="active">
+                        Compras
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="">
+                        Privacidad
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="">
+                        Entrega
+                    </a>
+                </li>
+            </ul>
+            <div class="faq-items">
+                <ul class="faq-items-group">
+                    <li class="title">
+                        Compras
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                    </li>
+                </ul>
+                
+                <ul class="faq-items-group">
+                    <li class="title">
+                        Ventas
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                    </li>
+                </ul>
+            </diiv>
+        </section>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </body>
+</html>
