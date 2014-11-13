@@ -14,7 +14,8 @@
             header {
                 height: 130px;
                 width: 100%;
-                background-image: url(http://stoa.usp.br/briannaloch/files/2689/14903/header-bg.jpg);
+                background: url(http://stoa.usp.br/briannaloch/files/2689/14903/header-bg.jpg) no-repeat;
+                background-size: cover;
                 }
                 
                 header > .logo {
@@ -23,13 +24,36 @@
                     font-size: 30px;
                     font-style: italic;
                     color: #00448C;
-                    
-                }
+                    float: left;
+                    }
             
-                header > .logo b {
-                    color: #72DE66;
-                }
+                    header > .logo b {
+                        color: #72DE66;
+                    }
+            
+                header > nav {
+                    float: right;
+                    text-align: left;
+                    width: 892px;
+                    }
                 
+                    header > nav > a {
+                        margin-top: 40px;
+                        display: inline-block;
+                        text-decoration: none;
+                        color: #000;
+                        padding: 15px;
+                        border-radius: 5px;
+                        background-image: linear-gradient(#fff, #ccc);
+                        opacity: .6;
+                        width: 100px;
+                        text-align: center;
+                        }
+                        
+                        header > nav > a:hover {
+                            opacity: .8;
+                        }
+                        
             ul, li { margin: 0; padding: 0; list-style-type: none; }
             
             .faq {
@@ -174,8 +198,6 @@
                     var destination = $(this).attr("href");
                     var targetItem = $(destination);
                     
-                    //$(".faq > .faq-menu > li").children("a.active").removeClass("active");
-                    //$(this).addClass("active");
                     $('body, html').animate({ 'scrollTop': targetItem.offset().top + 5}, 300); 
                 });
                 
@@ -193,6 +215,11 @@
             <div class="logo">
                 Ejemplo <b>FAQ</b>
             </div>
+            <nav>
+                <a href="#" title="">Inicio</a>
+                <a href="#" title="">Compras</a>
+                <a href="#" title="">FAQ</a>
+            </nav>
         </header>
         <section class="faq">
             <ul class="faq-menu">
@@ -204,6 +231,21 @@
                 <li>
                     <a href="#sells" title="">
                         Privacidad
+                    </a>
+                </li>
+                <li>
+                    <a href="#deliver" title="">
+                        Entrega
+                    </a>
+                </li>
+                <li>
+                    <a href="#deliver" title="">
+                        Entrega
+                    </a>
+                </li>
+                <li>
+                    <a href="#deliver" title="">
+                        Entrega
                     </a>
                 </li>
                 <li>
