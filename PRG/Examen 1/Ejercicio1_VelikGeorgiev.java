@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Velik Georgiev Chelebiev
+ * @author Santos Georgiev Chelebiev //Te parecerá bonito apropiarte de mi trabajo D:
  */
 public class Ejercicio1_VelikGeorgiev {
 
