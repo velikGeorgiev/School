@@ -34,17 +34,18 @@
                 header > nav {
                     float: right;
                     text-align: left;
-                    width: 892px;
+                    width: 810px;
+                    line-height: 130px
                     }
                 
                     header > nav > a {
-                        margin-top: 40px;
+                        /** margin-top: 40px; **/
                         display: inline-block;
                         text-decoration: none;
                         color: #000;
-                        padding: 15px;
-                        border-radius: 5px;
-                        background-image: linear-gradient(#fff, #ccc);
+                        padding: 0 15px;
+                        /** border-radius: 3px;**/
+                        background-image: linear-gradient(#fff, #eee);
                         opacity: .6;
                         width: 100px;
                         text-align: center;
@@ -216,9 +217,9 @@
                 Ejemplo <b>FAQ</b>
             </div>
             <nav>
-                <a href="#" title="">Inicio</a>
-                <a href="#" title="">Compras</a>
-                <a href="#" title="">FAQ</a>
+                <a href="#" title="" style="box-shadow: 10px -5px 8px #222;">Inicio</a>
+                <a href="#" title="" style="box-shadow: 10px -5px 8px #222; position: relative; left: -5px;">Compras</a>
+                <a href="#" title="" style="position: relative; left: -10px;">FAQ</a>
             </nav>
         </header>
         <section class="faq">
