@@ -16,6 +16,7 @@
             header {
                 height: 70px;
                 width: 100%;
+                min-width: 1600px;
                 background-color: #00AFF0;
                 background-size: cover;
                 }
@@ -340,9 +341,16 @@
                 </div>
                 
                 <a href="" title="" class="menu-item">FAQ</a>
-                <a href="" title="" class="menu-item">
-                    <img src="search3.png" alt="" style="width: 25px; position: relative; top: 7px;" />
-                </a>
+                
+                <div class="menu-item" id="menu-item-search" style="display: inline-block;">
+                    <a href="" title="" class="menu-item">
+                        <img src="search3.png" alt="" style="width: 25px; position: relative; top: 7px;" />
+                    </a>
+                    <div id="menu-item-search-sub" style="display: none; z-index: 10; position: absolute; background-color: #2CA3DE; padding: 0 20px;">
+                        <input placeholder="Buscar..." type="text" name="" style="text-align: center; width: 200px; font-size: 20px; border: 1px solid #006699; border-radius: 3px;" />
+                        <img src="search3.png" alt="" style="width: 24px;" />
+                    </div>
+                </div>
             </nav>
         </header>
         <section class="faq">
@@ -373,7 +381,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#term" title="">
+                    <a href="#terms" title="">
                         Condiciones
                     </a>
                 </li>
@@ -550,7 +558,7 @@
                     </li>
                 </ul>
                 
-                <ul class="faq-items-group" id="term">
+                <ul class="faq-items-group" id="terms">
                     <li class="title">
                         Condiciones
                     </li>
