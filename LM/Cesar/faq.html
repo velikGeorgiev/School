@@ -45,19 +45,20 @@
                 }
             
                 .faq-menu {
-                    background-color: #2B5464;
+                    background-color: #FFF; /** 2B5464 **/
                     position: absolute;
                     top: 0;
                     left: 0;
                     width: 200px;
                     z-index: 2;
                     list-style-type: none;
+                    box-shadow: 0 1px 10px rgba(108, 125, 142, 0.6);
                     }
 
                     .faq-menu a {
                         display: block;
                         line-height: 50px;
-                        color: #FFF;
+                        color: #000;
                         text-decoration: none;
                         position: relative;
                         padding-left: 24px;
@@ -69,15 +70,16 @@
                         }
 
                         .faq-menu .active {
-                            background-color: #3D6D80;
+                            background-color: #FFF; /** 3D6D80 **/
                             /* color: #FFF; */
                         }
+                        
                     .faq-menu .active::before { 
                         display: block;
                         left: 0;
                         height: 100%;
                         width: 5px;
-                        background-color: #4DB1E3;
+                        background-color: #4DB1E3; /** 4DB1E3 **/
                         position: absolute;
                         content: "";
                     }
@@ -212,6 +214,9 @@
                 <a href="" title="">Inicio</a>
                 <a href="" title="">Compras</a>
                 <a href="" title="">FAQ</a>
+                <a href="" title="">
+                    <img src="search3.png" alt="" style="width: 25px; position: relative; top: 7px;" />
+                </a>
             </nav>
         </header>
         <section class="faq">
@@ -232,18 +237,18 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#deliver" title="">
-                        Entrega
+                    <a href="#pay" title="">
+                        Pagos
                     </a>
                 </li>
                 <li>
-                    <a href="#deliver" title="">
-                        Entrega
+                    <a href="#lic" title="">
+                        Lisencia
                     </a>
                 </li>
                 <li>
-                    <a href="#deliver" title="">
-                        Entrega
+                    <a href="#term" title="">
+                        Condiciones
                     </a>
                 </li>
             </ul>
@@ -301,7 +306,7 @@
                 
                 <ul class="faq-items-group" id="sells">
                     <li class="title">
-                        Ventas
+                        Privacidad
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
@@ -339,7 +344,7 @@
                 
                 <ul class="faq-items-group" id="deliver">
                     <li class="title">
-                        Ventas
+                        Entrega
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
@@ -356,6 +361,72 @@
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                         </div>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <div>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </div>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <div>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </div>
+                    </li>
+                </ul>
+                
+                <ul class="faq-items-group" id="pay">
+                    <li class="title">
+                        Pagos
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <div>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </div>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <div>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </div>
+                    </li>
+                </ul>
+                
+                <ul class="faq-items-group" id="lic">
+                    <li class="title">
+                        Lisencia
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <div>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </div>
+                    </li>
+                    <li>
+                        <a href="" title="">Como cambiar mi contraseña ?</a>
+                        <div>
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                            Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
+                        </div>
+                    </li>
+                </ul>
+                
+                <ul class="faq-items-group" id="term">
+                    <li class="title">
+                        Condiciones
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
