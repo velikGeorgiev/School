@@ -55,7 +55,7 @@
                             opacity: .8;
                         }
                         
-            ul, li { margin: 0; padding: 0; list-style-type: none; }
+            ul, li { margin: 0; padding: 0; }
             
             .faq {
                 width: 1000px; 
@@ -71,6 +71,7 @@
                     left: 0;
                     width: 200px;
                     z-index: 2;
+                    list-style-type: none;
                     }
 
                     .faq-menu a {
@@ -109,6 +110,10 @@
                     padding-left: 250px;
                     }
 
+                    .faq-items .faq-items-group {
+                        list-style-type: none;
+                    }
+                    
                     .faq-items .faq-items-group > li {
                         background-color: #fff;
                         box-shadow: 0 1px 10px rgba(127, 145, 163, 0.2);
@@ -150,12 +155,22 @@
                             font-weight: 300;   
                         }
                         
-                        .faq-items .faq-items-group > li > p {
+                        .faq-items .faq-items-group > li > div {
                             padding: 0 0 20px 20px;
                             display: none;
                             color: #6C7D8E;
                             font-size: 14px;
                         }
+                        
+            .icon {
+                width: 42px;
+                opacity: .5;
+                cursor: pointer;
+                }
+                
+                .icon:hover {
+                    opacity: 1;
+                }
         </style>
         <!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script> !-->
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -205,7 +220,7 @@
                 $(".faq-items-group > li").on("click", function(event) {
                     event.preventDefault();
             
-                    $(this).find("p").toggle();
+                    $(this).find("div").first().toggle();
                     $(this).toggleClass("selectedItem");
                 });
             });
@@ -217,8 +232,8 @@
                 Ejemplo <b>FAQ</b>
             </div>
             <nav>
-                <a href="#" title="" style="box-shadow: 10px -5px 8px #222;">Inicio</a>
-                <a href="#" title="" style="box-shadow: 10px -5px 8px #222; position: relative; left: -5px;">Compras</a>
+                <a href="#" title="" style="box-shadow: 5px -5px 8px #222;">Inicio</a>
+                <a href="#" title="" style="box-shadow: 5px -5px 8px #222; position: relative; left: -5px;">Compras</a>
                 <a href="#" title="" style="position: relative; left: -10px;">FAQ</a>
             </nav>
         </header>
@@ -262,40 +277,48 @@
                     </li>
                     <li>
                         <a href="javascript:;" title="">Como cambiar mi contraseña ?</a>
-                        <p>                            
-                            Si deseas cambiar la contraseña de tu cuenta de Skype, puedes hacerlo fácilmente a través de tu explorador de Internet.<br /><br />
-
-                                Haz clic en este vínculo.<br />
-                                Inicia sesión en tu cuenta<br />
-                                Escribe tu contraseña anterior y, a continuación, introduce dos veces una contraseña nueva en los campos facilitados.<br />
-                                Haz clic en Guardar.<br />
-
-                            ¿Olvidaste tu contraseña? Dirígete a la página ¿Olvidaste tu contraseña? página para recuperar tu contraseña de Skype.<br />
-                        </p>
+                        <div>           
+                            <hr size="1" style="width: 90%; opacity: .5; position: relative; top: -10px;" />
+                            La contraseña que utilizas en MSN Messenger es la misma que la de tu cuenta Hotmail. Para cambiarla, sigue estos pasos:<br /><br />
+                            <ul style="margin-left: 40px; list-style-type: disc;">
+                                <li>Entra a tu bandeja de entrada de <b>Hotmail</b></li>
+                                <li>Haz clic en <b>Opciones</b> (situado en la parte superior derecha de la pantalla) y selecciona <b>Más opciones</b></li>
+                                <li>En la sección <b>Administra tu cuenta</b>, haz clic en <b>Detalles de la cuenta (contraseña, alias, zona horaria)</b></li>
+                                <li>Haz clic en <b>Cambiar</b>, a la derecha de <b>Contraseña</b></li>
+                                <li>Ingresa tu contraseña anterior, luego la nueva contraseña y vuleve a escribirla</li>
+                                <li>Finalmente, haz clic en <b>Guardar</b></li>
+                            </ul>
+                            
+                            <div style="padding-top: 20px; padding-right: 30px; text-align: right; font-style: italic;">
+                                ¿Respondio esto a tu pregunta?<br />
+                                <img src="happy.png" alt="" class="icon" /> 
+                                <img src="sad.png" alt="" class="icon" />
+                            </div>
+                        </div>
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
-                        <p>
+                        <div>
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
-                        </p>
+                        </div>
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
-                        <p>
+                        <div>
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
-                        </p>
+                        </div>
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
-                        <p>
+                        <div>
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
-                        </p>
+                        </div>
                     </li>
                 </ul>
                 
@@ -305,35 +328,35 @@
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
-                        <p>
+                        <div>
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
-                        </p>
+                        </div>
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
-                        <p>
+                        <div>
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
-                        </p>
+                        </div>
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
-                        <p>
+                        <div>
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
-                        </p>
+                        </div>
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
-                        <p>
+                        <div>
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
-                        </p>
+                        </div>
                     </li>
                 </ul>
                 
@@ -343,35 +366,35 @@
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
-                        <p>
+                        <div>
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
-                        </p>
+                        </div>
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
-                        <p>
+                        <div>
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
-                        </p>
+                        </div>
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
-                        <p>
+                        <div>
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
-                        </p>
+                        </div>
                     </li>
                     <li>
                         <a href="" title="">Como cambiar mi contraseña ?</a>
-                        <p>
+                        <div>
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
                             Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, Cambiar, <br />
-                        </p>
+                        </div>
                     </li>
                 </ul>
             </div>
