@@ -5,56 +5,36 @@
         <meta charset="UTF-8">
         <style type="text/css">
             body { 
-                background-color: #F0FFF0; 
+                background-color: #F3F3F5; 
                 font-family: "Open Sans",sans-serif;
                 padding: 0;
                 margin: 0;
             }
             
             header {
-                height: 130px;
+                height: 70px;
                 width: 100%;
-                background: url(http://stoa.usp.br/briannaloch/files/2689/14903/header-bg.jpg) no-repeat;
+                background-color: #00AFF0;
                 background-size: cover;
                 }
                 
-                header > .logo {
-                    line-height: 130px;
-                    margin-left: 50px;
-                    font-size: 30px;
-                    font-style: italic;
-                    color: #00448C;
-                    float: left;
-                    }
-            
-                    header > .logo b {
-                        color: #72DE66;
-                    }
-            
                 header > nav {
-                    float: right;
-                    text-align: left;
-                    width: 810px;
-                    line-height: 130px
-                    }
+                    margin: 0 auto;
+                    text-align: center;
+                    line-height: 70px;
+                }
                 
-                    header > nav > a {
-                        /** margin-top: 40px; **/
-                        display: inline-block;
-                        text-decoration: none;
-                        color: #000;
-                        padding: 0 15px;
-                        /** border-radius: 3px;**/
-                        background-image: linear-gradient(#fff, #eee);
-                        opacity: .6;
-                        width: 100px;
-                        text-align: center;
-                        }
+                header > nav > a {
+                    text-decoration: none;
+                    color: #fff;
+                    display: inline-block;
+                    padding: 0 10px;
+                    }
                         
-                        header > nav > a:hover {
-                            opacity: .8;
-                        }
-                        
+                    header > nav > a:hover {
+                        background-color: #0093DC;
+                    }
+                    
             ul, li { margin: 0; padding: 0; }
             
             .faq {
@@ -65,7 +45,7 @@
                 }
             
                 .faq-menu {
-                    background-color: #F0F6FF;
+                    background-color: #2B5464;
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -77,7 +57,7 @@
                     .faq-menu a {
                         display: block;
                         line-height: 50px;
-                        color: #849EDB;
+                        color: #FFF;
                         text-decoration: none;
                         position: relative;
                         padding-left: 24px;
@@ -89,7 +69,7 @@
                         }
 
                         .faq-menu .active {
-                            background-color: #E8F2FF;
+                            background-color: #3D6D80;
                             /* color: #FFF; */
                         }
                     .faq-menu .active::before { 
@@ -97,7 +77,7 @@
                         left: 0;
                         height: 100%;
                         width: 5px;
-                        background-color: #849EDB;
+                        background-color: #4DB1E3;
                         position: absolute;
                         content: "";
                     }
@@ -228,13 +208,10 @@
     </head>
     <body>
         <header>
-            <div class="logo">
-                Ejemplo <b>FAQ</b>
-            </div>
             <nav>
-                <a href="#" title="" style="box-shadow: 5px -5px 8px #222;">Inicio</a>
-                <a href="#" title="" style="box-shadow: 5px -5px 8px #222; position: relative; left: -5px;">Compras</a>
-                <a href="#" title="" style="position: relative; left: -10px;">FAQ</a>
+                <a href="" title="">Inicio</a>
+                <a href="" title="">Compras</a>
+                <a href="" title="">FAQ</a>
             </nav>
         </header>
         <section class="faq">
