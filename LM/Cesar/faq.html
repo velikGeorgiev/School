@@ -180,31 +180,6 @@
                     opacity: 1;
                 }
                
-                .menu-item {
-                    display: inline-block; 
-                    color: #fff;
-                    text-align: left;
-                }
-                
-                .menu-item a {
-                    color: #fff;
-                    padding: 0 20px;
-                    line-height: 40px; 
-                }
-                
-                .menu-item:hover {
-                    background-color: #2CA3DE; 
-                }
-                
-                .sub-menu {
-                    display: block;
-                    background-color: #2CA3DE;
-                }
-                
-                .sub-menu:hover {
-                    background-color: #4EB3E6; 
-                }
-                
                 .logo {
                     position: relative;
                     border-radius: 5px; 
@@ -216,7 +191,7 @@
                     background-color: #fff; 
                     width: 20px; 
                     height: 20px; 
-                    animation: logoFirst .8s alternate infinite;
+                    animation: logoFirst .5s alternate infinite;
                 }
                 
                 .logo.second {
@@ -225,7 +200,7 @@
                     background-color: #674EE6; 
                     width: 30px; 
                     height: 30px; 
-                    animation: logoSecond .8s alternate infinite;
+                    animation: logoSecond .5s alternate infinite;
                 }
                 
                 .logo.last {
@@ -234,7 +209,7 @@
                     background-color: #77F7CD; 
                     width: 40px; 
                     height: 40px; 
-                    animation: logoLast .8s alternate infinite;
+                    animation: logoLast .5s alternate infinite;
                 }
                                 
                 @keyframes logoFirst{                    
@@ -319,13 +294,10 @@
     </head>
     <body>
         <header>
-            <div class="logoContainer" style="left: 35%; padding: 5px; border-radius: 3px; border: 0px solid #fff; width: 50px; height: 50px; position: absolute;">
-                <div class="logo first">
-                </div>
-                <div class="logo second">
-                </div>
-                <div class="logo last">
-                </div>
+            <div class="logoContainer" style="left: 30%; padding: 5px; border-radius: 3px; border: 0px solid #fff; width: 50px; height: 50px; position: absolute;">
+                <div class="logo first"></div>
+                <div class="logo second"></div>
+                <div class="logo last"></div>
             </div>
             <nav>
                 <a href="" title="" class="menu-item">Inicio</a>
