@@ -4,6 +4,8 @@
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <style type="text/css">
+            a { text-decoration: none; }
+            
             body { 
                 background-color: #F3F3F5; 
                 font-family: "Open Sans",sans-serif;
@@ -143,7 +145,30 @@
                             color: #6C7D8E;
                             font-size: 14px;
                         }
-                        
+                
+            .resources {
+                padding-left: 250px;
+                padding-top: 50px;
+                text-align: center;
+                position: relative;
+                }
+            
+                .resources label {
+                    display: block;
+                    width: 130px;
+                }
+                
+                .resources img {
+                    width: 90px;
+                }
+                
+                .resources div:not(.title) {
+                    margin-left: 20px;
+                    margin-top: 50px;
+                    float: left;
+                    display: inline-block;
+                }
+                
             .icon {
                 width: 42px;
                 opacity: .5;
@@ -152,6 +177,80 @@
                 
                 .icon:hover {
                     opacity: 1;
+                }
+               
+                .menu-item {
+                    display: inline-block; 
+                    color: #fff;
+                    text-align: left;
+                }
+                
+                .menu-item a {
+                    color: #fff;
+                    padding: 0 20px;
+                    line-height: 40px; 
+                }
+                
+                .menu-item:hover {
+                    background-color: #2CA3DE; 
+                }
+                
+                .sub-menu {
+                    display: block;
+                    background-color: #2CA3DE;
+                }
+                
+                .sub-menu:hover {
+                    background-color: #4EB3E6; 
+                }
+                
+                .logo {
+                    position: relative;
+                    border-radius: 5px; 
+                    float: left;
+                }
+                
+                .logo.first {
+                    margin-left: 0px; 
+                    background-color: #fff; 
+                    width: 20px; 
+                    height: 20px; 
+                    animation: logoFirst .8s alternate infinite;
+                }
+                
+                .logo.second {
+                    top: -15px; 
+                    margin-left: 10px; 
+                    background-color: #674EE6; 
+                    width: 30px; 
+                    height: 30px; 
+                    animation: logoSecond .8s alternate infinite;
+                }
+                
+                .logo.last {
+                    top: -35px; 
+                    margin-left: 25px; 
+                    background-color: #77F7CD; 
+                    width: 40px; 
+                    height: 40px; 
+                    animation: logoLast .8s alternate infinite;
+                }
+                                
+                @keyframes logoFirst{                    
+                  0% { background-color: #FFF; }
+                  100% { background-color: #BFFCFF; }
+                }
+                
+                @keyframes logoSecond{                    
+                  0% { background-color: #20DEE8; }
+                  100% { background-color: #58EDF5; }
+                }
+                
+                @keyframes logoLast{                    
+                  /**  from { top: -35px; margin-left: 25px; width: 40px; height: 40px; }
+                    to { top: -40px; margin-left: 20px; width: 20px; height: 20px; }**/
+                  0% { background-color: #77F7CD; }
+                  100% { background-color: #22F2AD; }
                 }
         </style>
         <!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script> !-->
@@ -205,16 +304,43 @@
                     $(this).find("div").first().toggle();
                     $(this).toggleClass("selectedItem");
                 });
+                
+                $(".menu-item").hover(function(){
+                    var subMenu = $("#" + $(this).attr("id") + "-sub");
+                    
+                    subMenu.slideToggle(200);
+                    subMenu.css({
+                        left: $(this).offset().left + "px"
+                    });
+                });
             });
         </script>
     </head>
     <body>
         <header>
+            <div class="logoContainer" style="left: 35%; padding: 5px; border-radius: 3px; border: 0px solid #fff; width: 50px; height: 50px; position: absolute;">
+                <div class="logo first">
+                </div>
+                <div class="logo second">
+                </div>
+                <div class="logo last">
+                </div>
+            </div>
             <nav>
-                <a href="" title="">Inicio</a>
-                <a href="" title="">Compras</a>
-                <a href="" title="">FAQ</a>
-                <a href="" title="">
+                <a href="" title="" class="menu-item">Inicio</a>
+                
+                <div class="menu-item" id="menu-item-buy" style="display: inline-block;">
+                    <a href="" title="">Compras</a>
+                    
+                    <div id="menu-item-buy-sub" style="display: none; z-index: 10; position: absolute; background-color: #0093DC; width: 150px;">
+                        <a href="" title="" class="sub-menu">Estado</a>
+                        <a href="" title="" class="sub-menu">Historial</a>
+                        <a href="" title="" class="sub-menu">Buscar</a>
+                    </div>
+                </div>
+                
+                <a href="" title="" class="menu-item">FAQ</a>
+                <a href="" title="" class="menu-item">
                     <img src="search3.png" alt="" style="width: 25px; position: relative; top: 7px;" />
                 </a>
             </nav>
@@ -446,9 +572,31 @@
                     </li>
                 </ul>
             </div>
+            
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <div class="resources">
+                <hr />
+                <div class="title" style="text-align: left; font-size: 35px; font-weight: lighter; font-family: "Segoe UI Light"; color: #222222;">
+                    Recursos de soporte
+                </div>
+                <div>
+                    <img src="contact.png" alt="" />
+                    <label>Contactar con nosotros</label>
+                </div>
+                <div>
+                    <img src="chat2.png" alt="" />
+                    <label>Hablar con operador</label>
+                </div>
+                <div>
+                    <img src="map.png" alt="" />
+                    <label>Donde estamos</label>
+                </div>
+                <div>
+                    <img src="community2.png" alt="" />
+                    <label>Comunidad</label>
+                </div>
+            </div>
         </section>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        
     </body>
 </html>
