@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8" />
+        
+        <style type="text/css">
+            html, body { margin: 0; padding: 0; }
+
+            .container {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            .slide-container {
+                width: 200%;
+                height: 200%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                -webkit-transform: translate(0,0);
+                -ms-transform: translate(0,0); 
+                transform: translate(0,0); 
+            }
+            
+            .slide {
+                position:absolute;
+                top:0;
+                left:0;
+                width:50%;
+                height:50%;
+            }
+
+            #slide-1 { 
+                background: url(desk.jpg) no-repeat center center;; 
+                background-size: cover; 
+            }
+            
+            #slide-2 { 
+                background: url(pc.jpg) no-repeat center center;; 
+                background-size: cover; 
+                -webkit-transform: translate(0,100%);
+                -ms-transform: translate(0,100%); 
+                transform: translate(0,100%);
+            }
+            
+            #slide-3 { 
+                background: url(projects.jpg) no-repeat center center;; 
+                background-size: cover; 
+                -webkit-transform: translate(100%,100%);
+                -ms-transform: translate(100%,100%); 
+                transform: translate(100%,100%);
+            }
+            
+            #slide-4 { 
+                background: url(contact.jpg) no-repeat center center;; 
+                background-size: cover; 
+                -webkit-transform: translate(100%,0%);
+                -ms-transform: translate(100%,0%); 
+                transform: translate(100%,0%);
+            }
+            
+            .helper {    
+                position:absolute;
+                left:0;
+                top: 0;
+                height:600%;
+                width: 0;
+            }
+            
+            .marker {
+                height: 25%;
+                width: 100%;
+            }
+            .red {
+                background-color: #47373f;
+            }
+            .green {
+                background-color: #e0c6a3;
+            }
+            .blue {
+                background-color: #996d60;
+            }
+            .yellow {
+                background-color: #47373f;
+            }
+            
+            .fixedBackground {
+                background-attachment: fixed;
+                background-size: cover;
+                width: 100%;
+                position: absolute;
+                top: 300px;
+            }
+            
+            .ipadBackground {
+                background-image: url(ipad.jpg);
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="slide-container"
+                        data-0="transform:translate(0%,0%);"
+                        data-150p="transform:translate(0%,-50%);"
+                        data-200p="" 
+                        data-300p="transform:translate(-50%,-50%);" 
+                        data-350p="" 
+                        data-450p="transform:translate(-50%,0%);">
+                <div class="slides">
+                    
+                    <div id="slide-1" class="slide">
+                        
+                    </div>
+                    <div id="slide-2" class="slide">b</div>
+                    <div id="slide-3" class="slide">c</div>
+                    <div id="slide-4" class="slide">d</div>
+                </div>
+            </div>
+            <div class="helper">
+                <div class="marker red"></div>
+                <div class="marker green"></div>
+                <div class="marker blue"></div>
+                <div class="marker yellow"></div>
+            </div>
+        </div>
+        <div class="fixedBackground ipadBackground">
+                            sdsa
+                        </div>
+        <script src="skrollr.js"></script>
+        <script type="text/javascript">
+            var s = skrollr.init();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            body, html  { margin: 0; padding: 0; }
+            
+            .container {
+                background-color: rgba(0, 0, 0, .5);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0; left: 0;
+            }
+            
+            .animatedBackground {
+                /** Imagen de fondo **/
+                background-image: url(http://www.wired.com/wp-content/uploads/blogs/reviews/wp-content/uploads/2013/05/20130220-ZAGG-KEYBOARD-032edit.jpg);
+                background-repeat: no-repeat;
+                
+                /** contenedor **/
+                width: 100%;
+                height: 100%;
+                
+                /** Animacion **/
+                animation: backgroundAnime 20s alternate linear infinite;
+            }
+            
+            .fixedBackground { 
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-attachment: fixed;
+                position: relative;
+            }
+            
+            .expand {
+                transition: height .2s linear;
+            }
+            
+            .expand:hover {
+                position: absolute;
+                /** height: 70%; **/
+            }
+            
+            .fixedBackgroundSmall {
+                background-size: cover;
+                background-attachment: fixed;
+                position: relative;
+                width: 100%;
+                top: 35%;
+                height: 30%;
+            }
+            
+            .backgroundMacImage {
+                background-image: url(http://www.2d-x.com/wp-content/uploads/2013/10/On_Table_With_Tablet.jpg);
+            }
+            
+            .backgroundCityImage {
+                background-image: url(http://upload.wikimedia.org/wikipedia/commons/d/d4/New_York_City_at_night_HDR_edit1.jpg);
+            }
+            
+            @keyframes backgroundAnime {
+                0% { background-position: 0 0; }
+                30% { background-position: -100px -50px; }
+                60% { background-position: 0 -100px; }
+                100% { background-position: -150px -150px; }
+            }
+            
+            .text {
+                padding: 50px 0;
+                position: relative;
+                top: 40%;
+                height: 50px;
+                color: #fff;
+                font-size: 30px;
+                font-family: verdana;
+                text-align: center;
+                background-color: rgba(0, 0, 0, .7);
+                border-top: 1px solid rgba(255,255,255, .2);
+                border-bottom: 1px solid rgba(255,255,255, .2);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="animatedBackground">
+            <div class="text">
+                Mi primera pagina web !!!
+            </div>
+        </div>
+
+        <div class="fixedBackground backgroundMacImage">
+            <div class="container">
+                <div class="fixedBackgroundSmall backgroundCityImage expand" style="position: absolute; top: 0; bottom: auto;">
+                </div>
+                <div class="fixedBackgroundSmall backgroundCityImage" style="position: absolute; top: auto; bottom: 0;">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
