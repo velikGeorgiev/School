@@ -18,8 +18,7 @@ public class Practica2 {
     public static String palabraOculta = "";
     
     public static final char SEPARADOR = ',';
-    //public static char MASK_CHAR = (char)9679;
-    public static char MASK_CHAR = (char)11036;
+    public static char MASK_CHAR = (char)9607;
    
     public static final boolean toLowerCaseAllUserInputs = true;
     public static boolean esMultijugador = false;
@@ -35,10 +34,10 @@ public class Practica2 {
         agregarOpcion(3, "Salir");
         agregarOpcion(4, "Introducir varias palabras");
         agregarOpcion(5, "Mas Opciones");
-              
-        elegirOpcion();
+        
+        elegirOpcion(false);
     }
-    
+   
     /**
      * Imprime el menu en la pantalla del terminal, pediendo le al usuario
      * que eliga una opcion.
@@ -47,9 +46,12 @@ public class Practica2 {
      * se ejecutara su correspondiente accion. En caso de que 
      * la opcion no es valida se volvera a llamar este metodo.
      */
-    public static void elegirOpcion() {
-        // Cada vez que entremos en el programa limpiamos la pantalla
-        limpiarPantalla();
+    public static void elegirOpcion(boolean limpiarPantalla) {
+        
+        if(limpiarPantalla) {
+            // Cada vez que entremos en el programa limpiamos la pantalla
+            limpiarPantalla();
+        }
         
         // Monstramos el menu
         System.out.println("\n" + listaDeOpciones);
@@ -96,7 +98,7 @@ public class Practica2 {
                     // para ver el menu 
                     leerCadena("Pulsa [INTRO] para continuar: ");
                     
-                    elegirOpcion();
+                    elegirOpcion(true);
                 } else if(listaDePalabrasOcultas.length() > 0) {
                     if(esMultijugador) {
                         multiJugador(true);
@@ -119,7 +121,7 @@ public class Practica2 {
                 
             case 4:
                 agregarListaDePalabras();
-                elegirOpcion();
+                elegirOpcion(true);
             break;
                 
             case 5:
@@ -172,7 +174,7 @@ public class Practica2 {
         }
         
         if(!otraPartida.equals("si")) {
-            elegirOpcion();
+            elegirOpcion(true);
         }
     }
     
@@ -278,6 +280,10 @@ public class Practica2 {
                 break;
             }
         } while (!validarPalabra(mascara.toString()));
+        
+        if(validarPalabra(mascara.toString()) && fallos < fallosPermitidos) {
+            //TODO: palabra correcta
+        }
     }
     
     /**
@@ -639,7 +645,11 @@ public class Practica2 {
      * @param error El error que se debe de imprimir
      */
     public static void imprimirError(String error) {
-        System.out.println("\n*** " + error + " ***\n");
+        limpiarPantalla();
+        System.out.println(repetirCaracter(' ', 10) + repetirCaracter('#', (error.length() + 4)));
+        System.out.println(repetirCaracter(' ', (int)Math.floor(error.length() / 2)) + error);
+        System.out.println(repetirCaracter(' ', 10) + repetirCaracter('#', (error.length() + 4)));
+        System.out.println("\n\n");
     }
     
     /**
@@ -771,26 +781,26 @@ public class Practica2 {
      * @param mascara La mascara que se debe de imprimir
      */
     public static void imprimirMascara(StringBuilder mascara, int fallos) {
-        //StringBuilder mascaraParaImprimir = separarCaracteres(' ', mascara);
-        StringBuilder mascaraParaImprimir = mascara;
+        StringBuilder mascaraParaImprimir = separarCaracteres(' ', mascara);
         
-        char charDibujar = (char)9607;
+        char charDibujar = (char)9608;
         
         // Imprimimos la horca si hay fallos
         if(fallos > 0) {
-            System.out.print(cogerHorca(fallos, ((int)Math.ceil(mascara.length() / 2)) * 2));
+            //System.out.print(cogerHorca(fallos, ((int)Math.ceil(mascara.length() / 2)) * 2));
+            System.out.print(cogerHorca(fallos, 2));
             //System.out.println(" Fallos: (" + fallos + "/" + fallosPermitidos + ")");
             System.out.println(representacionGUIFallos(fallos));
         }
         
         // Imprimimos el borde superior
-        System.out.println(repetirCaracter(charDibujar, (mascaraParaImprimir.length() + 2)));
+        //System.out.println(repetirCaracter(charDibujar, (mascaraParaImprimir.length() + 2)));
         
         // Imprimimos la mascara
         System.out.println(mascaraParaImprimir);
         
         // Imprimimos el borde inferior
-        System.out.println(repetirCaracter(charDibujar, (mascaraParaImprimir.length() + 2)));
+        //System.out.println(repetirCaracter(charDibujar, (mascaraParaImprimir.length() + 2)));
     }
     
     public static String representacionGUIFallos(int fallos) {
@@ -879,5 +889,5 @@ public class Practica2 {
         }
         
         return resultado;
-    }
+    }    
 }
