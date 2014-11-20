@@ -453,16 +453,22 @@ public class Practica2 {
                 } else {
                     // Ya que el jugador no adivino la palabra entere
                     // le asignamos la maxima cantidad de fallos para que no pueda jugar
+                    // Como en el principio del bucle ya comprobamos que jugador podra jugar
+                    // el actual se descontara y pasara automaticamente al siguiente.
                     fallos[jugador] = fallosPermitidos;
                     
                     // Mostramos Un mensaje de que el juego para el termina
-                    dibujaTexto("Pierdes", "TU", 4);
+                    dibujaTexto("Pierdes", listaDeJugadores[jugador], 4);
                     
                     // Ya que el metodo dibujaTexto "limpiara" la pantalla
                     // imprimimos la mascara para el sisuiente jugador que pueda jugar
-                    while(fallos[jugador] >= fallosPermitidos) {
-                        jugador = siguenteJugador(jugador);
+                    int siguienteJugador = jugador;
+                    
+                    while(fallos[siguienteJugador] >= fallosPermitidos) {
+                        siguienteJugador = siguenteJugador(siguienteJugador);
                     }
+                    
+                    imprimirMascara(mascara, fallos[siguienteJugador]);
                     
                     continue;
                 }
