@@ -1,4 +1,4 @@
-package practica2;
+package juego;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -34,6 +34,8 @@ public class Practica2 {
         agregarOpcion(3, "Salir");
         agregarOpcion(4, "Introducir varias palabras");
         agregarOpcion(5, "Mas Opciones");
+        
+        dibujarLogo();
         
         elegirOpcion(false);
     }
@@ -214,10 +216,18 @@ public class Practica2 {
         char letra;
         
         /**
+         * La entrada original del usuario ( sea letra o cadena )
+         */
+        String entradaUsuario;
+        
+        /**
          * La palabra que el jugador debe de adivinar
          */
         String palabra;
         
+        /**
+         * Cantidad de lentras/caracteres acertados
+         */
         int aciertos;
         
         /**
@@ -235,13 +245,29 @@ public class Practica2 {
          * La palabra representado por "-" por cada
          * letra oculta ( no descubierta )
          */
-        StringBuilder mascara = new StringBuilder(repetirCaracter(MASK_CHAR, palabra.length()));
+        StringBuilder mascara = crearMascara(palabra);
         
         // Imprimimos la mascara
         imprimirMascara(mascara, 0);
         
-        do {            
-            letra = leerCaracter("Introduce una letra: ");
+        do {     
+            // Lee la entrada del usuario
+            entradaUsuario = leerCadena("Introduce letra o la palabra: ");
+            
+            /**
+             * Si la entrada del usuario es una cadena nos salimos del
+             * bucle y posteriormente se comprobara si la palabra introducida por el usuario 
+             * es correcta o no. Si se introduce un caracter/letra se comprueba si esta.
+             * Si es una valor vacio le volvemos a pedir que introduzca una palabra o letra/caracter
+             */
+            if(entradaUsuario.length() > 1) {                
+                break;
+            } else if(entradaUsuario.length() < 1) {
+                continue;
+            }
+        
+            // Si se ha introducido solo 1 letra la cogemos
+            letra = entradaUsuario.charAt(0);
             
             /**
              * Creamos la nueva mascara que contendra las letras
@@ -258,6 +284,8 @@ public class Practica2 {
             if(nuevaMascara.toString().equals(mascara.toString())){
                 fallos += 1;
             } else {
+                // Calculamos las diferencias entre la nueva mascara y la vieja 
+                // cada diferencia sera un acierto
                 aciertos = diferencia(mascara, nuevaMascara);
                 
                 System.out.println("\nLa letra " + letra + " esta " + aciertos + " veces\n");
@@ -281,9 +309,31 @@ public class Practica2 {
             }
         } while (!validarPalabra(mascara.toString()));
         
-        if(validarPalabra(mascara.toString()) && fallos < fallosPermitidos) {
-            //TODO: palabra correcta
+        if((validarPalabra(mascara.toString()) || entradaUsuario.equals(palabra)) && fallos < fallosPermitidos) {
+            dibujaTexto("Ganas", 10);
+        } else {
+            dibujaTexto("Pierdes", 10);
         }
+    }
+    
+    /**
+     * Crea una mascara ( cambiando las letras por algun caracter predefinido ) para la palabra indicada.
+     * 
+     * @param palabra La palabra para la cual se quiere crear una mascara
+     * @return La mascara de la palabra
+     */
+    public static StringBuilder crearMascara(String palabra) {
+        StringBuilder resultado = new StringBuilder(palabra.length());
+        
+        for(int i = 0; i < palabra.length(); i++) {
+            if(palabra.charAt(i) == ' ') { 
+                resultado.append(" ");
+            } else {
+                resultado.append(MASK_CHAR);
+            }
+        }
+        
+        return resultado;
     }
     
     /**
@@ -315,6 +365,11 @@ public class Practica2 {
          * Jugador al que le toca jugar
          */
         int jugador = 0;
+        
+        /**
+         * La entrada original del usuario ( sea letra o cadena )
+         */
+        String entradaUsuario;
         
         /**
          * La palabra que el jugador debe de adivinar
@@ -357,7 +412,7 @@ public class Practica2 {
          * La palabra representado por "-" por cada
          * letra oculta ( no descubierta )
          */
-        StringBuilder mascara = new StringBuilder(repetirCaracter(MASK_CHAR, palabra.length()));
+        StringBuilder mascara = crearMascara(palabra);
         
         // Imprimimos la mascara
         imprimirMascara(mascara, 0);
@@ -378,13 +433,55 @@ public class Practica2 {
                 jugador = siguenteJugador(jugador);
             }
             
-            letra = leerCaracter("(" + listaDeJugadores[jugador] + ")Introduce una letra: ");
+            // Lee la entrada del jugador actual
+            entradaUsuario = leerCadena("(" + listaDeJugadores[jugador] + ") Introduce letra o la palabra: ");
+            
+            /**
+             * Si la entrada del usuario es una cadena nos salimos del
+             * bucle y posteriormente se comprobara si la palabra introducida por el usuario 
+             * es correcta o no. Si se introduce un caracter/letra se comprueba si esta.
+             * Si es una valor vacio le volvemos a pedir que introduzca una palabra o letra/caracter
+             */
+            if(entradaUsuario.length() > 1) {       
+                // Si la palabra es correcta calculamos la puntuacion + el bonus definido
+                // y salimos del bucle. Posteriormente se mostrara el resutlado de la partida
+                // Si la palabra no es correcta el jugaro ya no podra jugar en esta partida
+                if(entradaUsuario.equals(palabra)) {
+                    int difPalabras = diferencia(new StringBuilder(entradaUsuario), mascara);
+                    puntuacion[jugador] += (difPalabras + solverBonus);
+                    break;
+                } else {
+                    // Ya que el jugador no adivino la palabra entere
+                    // le asignamos la maxima cantidad de fallos para que no pueda jugar
+                    fallos[jugador] = fallosPermitidos;
+                    
+                    // Mostramos Un mensaje de que el juego para el termina
+                    dibujaTexto("Pierdes", "TU", 4);
+                    
+                    // Ya que el metodo dibujaTexto "limpiara" la pantalla
+                    // imprimimos la mascara para el sisuiente jugador que pueda jugar
+                    while(fallos[jugador] >= fallosPermitidos) {
+                        jugador = siguenteJugador(jugador);
+                    }
+                    
+                    continue;
+                }
+            } else if(entradaUsuario.length() < 1) {
+                continue;
+            }
+        
+            // Si se ha introducido solo 1 letra la cogemos
+            letra = entradaUsuario.charAt(0);
             
             /**
              * Creamos la nueva mascara que contendra las letras
              * iguales a las intruducidas por el usuario descubiertas.
              */
             StringBuilder nuevaMascara = validarLetra(palabra, letra, mascara);
+            
+            
+            // Imprimimos la mascara actual
+            imprimirMascara(mascara, fallos[jugador]);
             
             /**
              *  Si las mascaras son iguales, la letra introducida por el 
@@ -396,11 +493,14 @@ public class Practica2 {
                 fallos[jugador] += 1;
                 jugador = siguenteJugador(jugador);
             } else {
+                // Calculamos la diferencia entre la mascara nueva y la vieja
+                int difMascaras = diferencia(mascara, nuevaMascara);
+                
                 // A la puntuacion del jugador se le sumara la cantidad
                 // de letras descubiertas
-                puntuacion[jugador] += diferencia(mascara, nuevaMascara);
+                puntuacion[jugador] += difMascaras;
                 
-                aciertos = diferencia(mascara, nuevaMascara);
+                aciertos = difMascaras;
                 
                 System.out.println("\nLa letra " + letra + " esta " + aciertos + " veces\n");
                 
@@ -413,10 +513,7 @@ public class Practica2 {
                 // Asignamos la nueva mascara
                 mascara = nuevaMascara;
             }
-            
-            // Imprimimos la mascara actual
-            imprimirMascara(mascara, fallos[jugador]);
-            
+                        
             /**
              * Si no hay jugadores con "vidas" mostramos la palabra
              */
@@ -433,7 +530,7 @@ public class Practica2 {
             System.out.println(listaDeJugadores[i] + ": " + puntuacion[i] + " puntos");
         }
         
-        System.out.println("\nEl ganador es " + listaDeJugadores[indexDelValorMax(puntuacion)]);
+        System.out.println("El ganador es: " + listaDeJugadores[indexDelValorMax(puntuacion)]);
     }
     
     /**
@@ -653,14 +750,14 @@ public class Practica2 {
     }
     
     /**
-     * Comprueba si una palabra esta compuesta SOLO por letras.
+     * Comprueba si una palabra esta compuesta SOLO por letras o espacios.
      * 
      * @param palabra La palabra a comprobar
      * @return TRUE si la palabra es correcta ( solo letras ) FALSE en caso contrario
      */
     public static boolean validarPalabra(String palabra) {
         for(int i = 0; i < palabra.length(); i++) {
-            if(!Character.isAlphabetic(palabra.charAt(i))) {
+            if(!Character.isAlphabetic(palabra.charAt(i)) && palabra.charAt(i) != ' ') {
                 return false;
             }
         }
@@ -890,4 +987,89 @@ public class Practica2 {
         
         return resultado;
     }    
+    
+    public static void dibujaTexto(String status, int cantidadDeParpadeos) {
+        dibujaTexto(status, "", cantidadDeParpadeos);
+    }
+    
+    public static void dibujaTexto(String status, String textoAdicional, int cantidadDeParpadeos) {
+        String textoGanas = "  _    _                _____                       _       \n" +
+                            " | |  | |              / ____|                     | |      \n" +
+                            " | |__| | __ _ ___    | |  __  __ _ _ __   __ _  __| | ___  \n" +
+                            " |  __  |/ _` / __|   | | |_ |/ _` | '_ \\ / _` |/ _` |/ _ \\ \n" +
+                            " | |  | | (_| \\__ \\   | |__| | (_| | | | | (_| | (_| | (_) |\n" +
+                            " |_|  |_|\\__,_|___/    \\_____|\\__,_|_| |_|\\__,_|\\__,_|\\___/";
+        
+        
+        String textoPierdes = "   _____                           ____                 \n" +
+                              "  / ____|                         / __ \\                \n" +
+                              " | |  __  __ _ _ __ ___   ___    | |  | |_   _____ _ __ \n" +
+                              " | | |_ |/ _` | '_ ` _ \\ / _ \\   | |  | \\ \\ / / _ \\ '__|\n" +
+                              " | |__| | (_| | | | | | |  __/   | |__| |\\ V /  __/ |   \n" +
+                              "  \\_____|\\__,_|_| |_| |_|\\___|    \\____/  \\_/ \\___|_|  ";
+        
+        String texto = "";
+        
+        switch (status) {
+            case "Ganas": texto = textoGanas; break;
+            case "Pierdes": texto = textoPierdes; break;
+        }
+        
+        // Limpiamos la pantalla
+        limpiarPantalla();
+        
+        for (int i = 0; i < cantidadDeParpadeos; i++) {
+            if(i % 2 == 0) {
+                System.out.println(textoAdicional);
+                System.out.println(texto);
+            } else {
+                limpiarPantalla();
+            }
+            
+            try {
+                Thread.sleep(500);
+            }catch(Exception e) { }
+        }
+    }
+    
+    public static void dibujarLogo() {
+        String[] texto = new String[5];
+                
+                       texto[0] = "    ___    __                              __    ";
+                       texto[1] = "   /   |  / /_  ____  ______________ _____/ /___ ";
+                       texto[2] = "  / /| | / __ \\/ __ \\/ ___/ ___/ __ `/ __  / __ \\";
+                       texto[3] = " / ___ |/ / / / /_/ / /  / /__/ /_/ / /_/ / /_/ /";
+                       texto[4] = "/_/  |_/_/ /_/\\____/_/   \\___/\\__,_/\\__,_/\\____/";
+                       
+        for (int i = 0; i < 10; i++) {
+        
+            limpiarPantalla();
+            for(int x = 0; x < texto.length; x++) {
+                System.out.println(repetirCaracter(' ', (i * 2)) + texto[x]);
+            }
+            
+            
+            try {
+                Thread.sleep(300);
+            }catch(Exception e) { }
+        }
+        
+        limpiarPantalla();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
