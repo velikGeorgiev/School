@@ -1,4 +1,4 @@
-package juego;
+package practica2;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -374,7 +374,7 @@ public class Practica2 {
         /**
          * La palabra que el jugador debe de adivinar
          */
-        String palabra;
+        StringBuilder palabra;
         
         /**
          * Letra introducida por el jugador
@@ -390,12 +390,7 @@ public class Practica2 {
          * Los fallos cometidos por cada jugador
          */
         int[] fallos = new int[listaDeJugadores.length];
-        
-        /**
-         * El numero de veces que aparece la letra introducida )
-         */
-        int aciertos;
-                
+                        
         /**
          * Si se quiere jugar con palabra aleatoria la elegimos
          * de la lista y si no utilizamos la palabra predifinada por el
@@ -403,16 +398,16 @@ public class Practica2 {
          */
         if(palabraAleatoria == true) {
             // Genera una palabra aleatoria a partir de la lista
-            palabra = palabraAleatoria();
+            palabra = new StringBuilder(palabraAleatoria());
         } else {
-            palabra = palabraOculta;
+            palabra = new StringBuilder(palabraOculta);
         }
         
         /**
          * La palabra representado por "-" por cada
          * letra oculta ( no descubierta )
          */
-        StringBuilder mascara = crearMascara(palabra);
+        StringBuilder mascara = crearMascara(palabra.toString());
         
         // Imprimimos la mascara
         imprimirMascara(mascara, 0);
@@ -422,15 +417,8 @@ public class Practica2 {
              * Comprobamos si el numero del jugador esta en el rango.
              * Si no esta empezamos del jugador 0
              */
-            if(jugador >= listaDeJugadores.length) {
-                jugador = 0;
-            }
-            
-            /**
-             * Comprobamos si el jugador puede jugar
-             */
-            while(fallos[jugador] >= fallosPermitidos) {
-                jugador = siguenteJugador(jugador);
+            if(jugador < 0 || jugador >= listaDeJugadores.length) {
+                break;
             }
             
             // Lee la entrada del jugador actual
@@ -446,9 +434,13 @@ public class Practica2 {
                 // Si la palabra es correcta calculamos la puntuacion + el bonus definido
                 // y salimos del bucle. Posteriormente se mostrara el resutlado de la partida
                 // Si la palabra no es correcta el jugaro ya no podra jugar en esta partida
-                if(entradaUsuario.equals(palabra)) {
+                if(entradaUsuario.equals(palabra.toString())) {
                     int difPalabras = diferencia(new StringBuilder(entradaUsuario), mascara);
                     puntuacion[jugador] += (difPalabras + solverBonus);
+                    
+                    // Imprimimos la mascara
+                    limpiarPantalla();
+                    imprimirMascara(palabra, fallos[jugador]);
                     break;
                 } else {
                     // Ya que el jugador no adivino la palabra entere
@@ -460,15 +452,12 @@ public class Practica2 {
                     // Mostramos Un mensaje de que el juego para el termina
                     dibujaTexto("Pierdes", listaDeJugadores[jugador], 4);
                     
-                    // Ya que el metodo dibujaTexto "limpiara" la pantalla
-                    // imprimimos la mascara para el sisuiente jugador que pueda jugar
-                    int siguienteJugador = jugador;
+                    // Pasamos al siguiente jugador
+                    jugador = siguenteJugador(jugador, fallos);
                     
-                    while(fallos[siguienteJugador] >= fallosPermitidos) {
-                        siguienteJugador = siguenteJugador(siguienteJugador);
-                    }
-                    
-                    imprimirMascara(mascara, fallos[siguienteJugador]);
+                    // Antes de volver a iniciar el bucle mostramos la mascara 
+                    // del nuevo jugador
+                    imprimirMascara(mascara, fallos[jugador]);
                     
                     continue;
                 }
@@ -483,32 +472,28 @@ public class Practica2 {
              * Creamos la nueva mascara que contendra las letras
              * iguales a las intruducidas por el usuario descubiertas.
              */
-            StringBuilder nuevaMascara = validarLetra(palabra, letra, mascara);
-            
-            
-            // Imprimimos la mascara actual
-            imprimirMascara(mascara, fallos[jugador]);
-            
+            StringBuilder nuevaMascara = validarLetra(palabra.toString(), letra, mascara);
+                   
+            /**
+             * Calculamos la diferencia entre la mascara nueva y la vieja.
+             */
+            int difMascaras = diferencia(mascara, nuevaMascara);
+                        
             /**
              *  Si las mascaras son iguales, la letra introducida por el 
              * jugador no es correcta, por lo tanto le sumamos un fallo
              * y pasamos al siguiente jugador. Si las mascaras no son iguales
              * sumamos los puntos correspondientes al jugador y le damos otro intento.
              */
-            if(nuevaMascara.toString().equals(mascara.toString())){
+            if(difMascaras == 0){
                 fallos[jugador] += 1;
-                jugador = siguenteJugador(jugador);
-            } else {
-                // Calculamos la diferencia entre la mascara nueva y la vieja
-                int difMascaras = diferencia(mascara, nuevaMascara);
-                
+                jugador = siguenteJugador(jugador, fallos);
+            } else {                
                 // A la puntuacion del jugador se le sumara la cantidad
                 // de letras descubiertas
                 puntuacion[jugador] += difMascaras;
                 
-                aciertos = difMascaras;
-                
-                System.out.println("\nLa letra " + letra + " esta " + aciertos + " veces\n");
+                System.out.println("\nLa letra " + letra + " esta " + difMascaras + " veces\n");
                 
                 // Si acaba de resolver la palabra le sumamos el bonus
                 if(validarPalabra(nuevaMascara.toString())){
@@ -519,7 +504,7 @@ public class Practica2 {
                 // Asignamos la nueva mascara
                 mascara = nuevaMascara;
             }
-                        
+                  
             /**
              * Si no hay jugadores con "vidas" mostramos la palabra
              */
@@ -527,6 +512,11 @@ public class Practica2 {
                 imprimirError("No quedan jugadores con 'vidas'. La palabra era: " + palabra);
                 break;
             }
+            
+            // "Borramos todo lo que hay en la pantalla
+            // como por ejemplo "el panel" del jugador anterior
+            limpiarPantalla();
+            imprimirMascara(mascara, fallos[jugador]);            
         } while(!validarPalabra(mascara.toString())); // El juego continua hasta que la mascara sea una palabra valida
         
         // Mostramos las puntuaciones
@@ -543,18 +533,25 @@ public class Practica2 {
      * El metodo devuelve el indice del siguiente jugador respecto
      * el jugador actual.
      * 
-     * OJO: Este metodo no comprueba si el jugador tiene intentos restantes
-     * 
      * @param jugadorActual Jugador actual
-     * @return El siguiente jugador que debe de jugar 
+     * @param fallos Los fallos cometidos por los jugadores en la partida
+     * @return El siguiente jugador que debe de jugar. Si no hay jugadores
+     *         con intentos restantes devuelve -1
      */
-    public static int siguenteJugador(int jugadorActual) {
-        jugadorActual++;
+    public static int siguenteJugador(int jugadorActual, int[] fallos) {
         
-        if(jugadorActual >= listaDeJugadores.length){
-            jugadorActual = 0;
+        if(!jugadorEnJuego(fallos)) {
+            return -1;
         }
         
+        do {
+            jugadorActual++;
+
+            if(jugadorActual >= listaDeJugadores.length){
+                jugadorActual = 0;
+            }
+        } while (fallos[jugadorActual] >= fallosPermitidos);
+                
         return jugadorActual;
     }
     
@@ -890,20 +887,12 @@ public class Practica2 {
         
         // Imprimimos la horca si hay fallos
         if(fallos > 0) {
-            //System.out.print(cogerHorca(fallos, ((int)Math.ceil(mascara.length() / 2)) * 2));
             System.out.print(cogerHorca(fallos, 2));
-            //System.out.println(" Fallos: (" + fallos + "/" + fallosPermitidos + ")");
             System.out.println(representacionGUIFallos(fallos));
         }
         
-        // Imprimimos el borde superior
-        //System.out.println(repetirCaracter(charDibujar, (mascaraParaImprimir.length() + 2)));
-        
         // Imprimimos la mascara
         System.out.println(mascaraParaImprimir);
-        
-        // Imprimimos el borde inferior
-        //System.out.println(repetirCaracter(charDibujar, (mascaraParaImprimir.length() + 2)));
     }
     
     public static String representacionGUIFallos(int fallos) {
