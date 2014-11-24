@@ -1,5 +1,5 @@
 EL  JUEGO  DEL  AHORCADO
------------------------------
+---------------------------------------------------
 * El juego permite modo Multijugador
 	Pueden jugar varios jugadores. A diferencia del Single Player, en multijugador
 	se lleva una cuenta de puntos. A cada jugador se le añadira 1 punto por letra descubierta.
@@ -8,7 +8,60 @@ EL  JUEGO  DEL  AHORCADO
 	bonus se puede modificar en el menu "Mas Opciones" ). Si un jugaro introduce 8 letras NO validas
 	o una palabra entera no valida, este deja de jugar ( se queda eliminado de esta partida ), pero
 	al final sus puntos se contaran en la puntuacion final. Si todos los jugadores quedan sin intentos
-	la partida termina, se muestra la puntuacion, el ganador y la palabra correcta.
-* 
-* 
-* 
+	la partida termina, se muestra la puntuacion, el ganador y la palabra correcta. 
+	Cuando un jugador introduce una letra correcta se le da otro intento ( el juego no pasa al siguiente jugador ).
+	Si el jugador es equiboca con la letra introducida el juego pasa automaticamente al siguiente jugador de la lista.
+	
+	A la hora de pasar al siguiente jugador, los jugadores que han superado el limite de fallos maximo y los jugadores
+	que han introducido una pabra mal se quedan omitidos ( no se les deja jugar ).
+
+        TO DO: Se debe de implementar una "interfaz" mejor y mas clara a la hora de cambio entre jugadores ( menos confusa )
+
+* El propio usuario puede definir una lista de palabras de la cual se eligira una palabra aleatoria con la que se jugara.
+	OJO: Introducir la palabra "fin" para que el programa termine de pedir palabras.
+	OJO: La lista de palabras tiene prioridad a una solo palabra definida a la hora de jugar.
+
+* A la hora de jugar el jugador puede introducir una letra o una palabra entera. 
+	+ Si se introduce una letra y no es valida al jugador se le sumara un fallo ( se le resta un intento ) y en caso de que
+	    el juego esta en multijugador se pasara al siguiente jugador. ( En modo de Single player simplemente contara un fallo y dara al jugador introducir
+	    la siguiente letra )
+	+ En caso de que se introduce una palabra. El juego considera que el jugador sabe la palabra entera. Si la palabra es correcta 
+	   ( es la misma que la palabra oculta ) el juego termina ( en caso de multijugador se mostraran tambien los resultados ).
+	   Si la palabra no es correcta el juego tambien terminara mostrando la palabra correcte si se juega en modo de Single player.
+	   En multiplayer el jugador que introduce una palabra INCORRECTA no podra volver a jugar en la misma partida, pero conservara 
+	   los puntos ganados por las letras descubiertas. Si el juego esta en multijugador y todos los jugadores se equibocan introduciendo la palabra
+	   directamente o llegan al limite maximo de fallos, el juego termina mostrando la palabra correcta junto con la puntuacion final. 
+	   En este caso a ningun jugador se le otorgaran los puntos BONUS ya que la palabra no ha sido descubierta.
+
+* Se agrego el menu "Mas opciones" que contiene un sub menu de 3 opciones adicionales, que permiten ajustar el juego 
+   segun el gusto del jugador. En todas las opciones adicionales se mostrara entre parentesis el valor actual que tienen.
+
+	+ La primera opcion permite definir el numero de jugadores que participaran en la partida. Si se introduce un jugador
+	    el juego se pondra en modo Single player automaticamente. Si se introduce un numero superior al 1 el juego se pondra 
+	    automaticamente en modo de multijugador dando paso a una serie de reglamentos adicionales. Despues de ingresar
+	    el numero de jugadores que participaran en la partida se pedira indicar el nombre/apodo de cada uno de ello.
+	+ La siguiente opcion permite definir la cantidad de puntos bonus que se le sumaran al jugador que descubra la palabra entera.
+	    Esta opcion ( estos puntos ) son disponibles solo en modo de multijugador. La canditdad de puntos indicados se sumaran a los
+	    puntos conseguidos por el jugador que resuelve la palabra entera.
+		OJO: Esta opcion tiene un valor predeterminado de 3.
+
+		TO DO: Ajustar el valor predeterminado segun la cantidad de caracteres en la/las palabra/s disponibles.
+	+ La opcion "Cambiar la mascara del jugador" permite cambiar el caracter con el que se reemplazaran las letras/caracteres de la
+	    palabra oculta a la hora de jugar ( tanto en single player como en multiplayer ).
+
+		TO DO: Permitir ingresar CHAR CODES de la table UTF.
+* Se inpuso una serie de normas que deben de cumplir las palabras introducidas en una lista o a la palabra unitaria. Cada palabra puede  
+   puede contener solo LETRAS y especios. La regla de los espacio es disponible por si se introducen nombres de libros, peliculas etc.
+
+* OJO: No se hacen validaciones a las entradas del usuario ( no se llego al temerio necesario ), asi que si se pide numero hay que introducir numero.
+* Se agregaron diferentes "simulaciones de animacion" via terminal. Al empezar el juego, perder o ganar la partida se muestran unos textos en forma
+    de ASCII Art. Estos textos "simulan" una "animacion". Esto se hace limpiando la pantalla ( imprimiendo muchas lineas nuevas blancas ) y dormiendo el 
+    hilo actual, para dar una sensacion de "animacion".
+* Se agrego un muñeco  y una horca que representaran los errors/fallos cometidos por el jugador. Cada vez que se cometa un error se mostrara una parte mas
+   de la horca o el muñeco. 
+
+	TO DO: En multijugador se debe de mejorar la interfaz para distinguir un jugador de otro.
+
+======== TO DOs importantes ========
+--------------------------------------------------------------------
+	+ Mejorar la "interfaz" [ ***** ]
