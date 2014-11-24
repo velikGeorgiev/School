@@ -1,0 +1,14 @@
+EL  JUEGO  DEL  AHORCADO
+-----------------------------
+* El juego permite modo Multijugador
+	Pueden jugar varios jugadores. A diferencia del Single Player, en multijugador
+	se lleva una cuenta de puntos. A cada jugador se le añadira 1 punto por letra descubierta.
+	( Por ejemplo si introduce una "a" y la letra esta 2 veces se le sumaran 2 puntos. )
+	Al jugador que descubra la palabra entera se le sumaran 3 puntos aparte ( esta puntuacion
+	bonus se puede modificar en el menu "Mas Opciones" ). Si un jugaro introduce 8 letras NO validas
+	o una palabra entera no valida, este deja de jugar ( se queda eliminado de esta partida ), pero
+	al final sus puntos se contaran en la puntuacion final. Si todos los jugadores quedan sin intentos
+	la partida termina, se muestra la puntuacion, el ganador y la palabra correcta.
+* 
+* 
+* 

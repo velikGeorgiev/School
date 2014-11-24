@@ -11,19 +11,63 @@ public class Practica2 {
     
     public static Scanner scan = new Scanner(System.in);
     
+    /**
+     * La lista de opciones principales que se le mostrara al usuario.
+     */
     public static StringBuilder listaDeOpciones = new StringBuilder();
+    
+    /**
+     * Lista de palabras, de las cuales se eligira una, de forma aleatoria,
+     * para jugar. 
+     */
     public static StringBuilder listaDePalabrasOcultas = new StringBuilder();
     
+    /**
+     * Vector que guardara los nombres de los jugadores en modo multijugador.
+     */
     public static String[] listaDeJugadores;
+    
+    /**
+     * En esta variable se guardara la palabra con la que se jugara. 
+     * ( Esto es en caso de que se jugara con una palabra en lugar de una lista de palabras )
+     * En caso de que exista una lista de palabras, la palabra en esta variable no se utilizara en el
+     * juego, ya que se le da mas prioridad a las palabras en la lista.
+     */
     public static String palabraOculta = "";
     
-    public static final char SEPARADOR = ',';
-    public static char MASK_CHAR = (char)9607;
+    /**
+     * Signo separador con el cual se separaran las diferentes palabras en la lista de palabras.
+     */
+    private static final char SEPARADOR = ',';
+    
+    /**
+     * El caracter con el que se mostraran la letras "ocultas".
+     * El caracter que representara la mascara de la palabra
+     */
+    public static char MASK_CHAR = (char)0x25A3;
    
-    public static final boolean toLowerCaseAllUserInputs = true;
+    /**
+     * Indica si todas las entradas del usuario por el terminal 
+     * se deben de convertir y tratar como letra minuscula.
+     * Este valor tiene que ser TRUE para que las comparaciones
+     * de las palabras sea correcta.
+     */
+    private static final boolean toLowerCaseAllUserInputs = true;
+    
+    /**
+     * Indica si el juego esta en modo de multijugador o no.
+     */
     public static boolean esMultijugador = false;
     
-    public static int solverBonus = 0;
+    /**
+     * Puntos bonus que se sumaran al jugador que resuelva la palabra. 
+     * Esta variable se utilizara solo en modo multijugador
+     */
+    public static int solverBonus = 3;
+    
+    /**
+     * Indica los fallos maximos que pueda cometer un jugador.
+     */
     public static int fallosPermitidos = 8;
     
     public static void main(String[] args) {
@@ -35,8 +79,10 @@ public class Practica2 {
         agregarOpcion(4, "Introducir varias palabras");
         agregarOpcion(5, "Mas Opciones");
         
+        // Dibujamos el "logo" del juego
         dibujarLogo();
         
+        // Pedimos al usuario que eliga una opcion
         elegirOpcion(false);
     }
    
@@ -129,7 +175,11 @@ public class Practica2 {
             case 5:
                 String multiStr = (esMultijugador) ? "Multijugador: " + listaDeJugadores.length : "Un Jugador";
                 System.out.println(" > 1: Numero de jugadores (" + multiStr +")");
-                System.out.println(" > 2: Limite de fallos (" + fallosPermitidos + ")");
+                /**
+                 * De momento esta opcion queda deshabilitado.
+                 * Razon: El numero de fallos esta directamente relacionado con la horca
+                 * System.out.println(" > 2: Limite de fallos (" + fallosPermitidos + ")");
+                 */
                 System.out.println(" > 3: Bonus puntos para el que resuelva la palabra (" + solverBonus + ")");
                 System.out.println(" > 4: Cambiar la mascara del juego (" + MASK_CHAR + ")");
                 
@@ -148,9 +198,13 @@ public class Practica2 {
                         }
                     break;
                         
-                    case 2:
-                        fallosPermitidos = leerNumero("    > Fallos permitidos: ");
-                    break;
+                    /**
+                     * De momento esta opcion queda deshabilitado.
+                     * Razon: El numero de fallos esta directamente relacionado con la horca
+                     *   case 2:
+                     *       fallosPermitidos = leerNumero("    > Fallos permitidos: ");
+                     *  break;
+                     */
                     
                     case 3:
                         if(!esMultijugador) {
@@ -454,12 +508,18 @@ public class Practica2 {
                     
                     // Pasamos al siguiente jugador
                     jugador = siguenteJugador(jugador, fallos);
+                                        
+                    // Si no quedan jugadores en juego ( jugadores con intentos disponibles ) mostramos la palabra y 
+                    // la puntuacion final
+                    if(jugador > -1) {
+                        // Antes de volver a iniciar el bucle mostramos la mascara 
+                        // del nuevo jugador
+                        imprimirMascara(mascara, fallos[jugador]);
                     
-                    // Antes de volver a iniciar el bucle mostramos la mascara 
-                    // del nuevo jugador
-                    imprimirMascara(mascara, fallos[jugador]);
-                    
-                    continue;
+                        continue;
+                    } else {
+                        break;
+                    }
                 }
             } else if(entradaUsuario.length() < 1) {
                 continue;
@@ -506,10 +566,9 @@ public class Practica2 {
             }
                   
             /**
-             * Si no hay jugadores con "vidas" mostramos la palabra
+             * Si no hay jugadores con "vidas" mostramos la palabra y los resultados
              */
             if(jugadorEnJuego(fallos) == false) {
-                imprimirError("No quedan jugadores con 'vidas'. La palabra era: " + palabra);
                 break;
             }
             
@@ -519,14 +578,21 @@ public class Practica2 {
             imprimirMascara(mascara, fallos[jugador]);            
         } while(!validarPalabra(mascara.toString())); // El juego continua hasta que la mascara sea una palabra valida
         
+        // Antes de mostrar los resultados limpiamos la pantalla
+        limpiarPantalla();
+        
+        // Mostramos la palabra
+        System.out.println("La la palabra era: " + palabra);
+        
         // Mostramos las puntuaciones
         System.out.println("===== Puntuaciones: ======");
         
         for(int i = 0; i < listaDeJugadores.length; i++) {
             System.out.println(listaDeJugadores[i] + ": " + puntuacion[i] + " puntos");
         }
+        System.out.println(repetirCaracter('=', 26));
         
-        System.out.println("El ganador es: " + listaDeJugadores[indexDelValorMax(puntuacion)]);
+        System.out.println("El ganador es: " + listaDeJugadores[indexDelValorMax(puntuacion)] + "\n");
     }
     
     /**
@@ -895,9 +961,21 @@ public class Practica2 {
         System.out.println(mascaraParaImprimir);
     }
     
+    /**
+     * Representa los intentos fallados ( letras no validas ) en forma de "GUI" terminal.
+     * Este metodo se utilizara a la hora de dibujar la horca.
+     * 
+     * @param fallos El numero de fallos cometidos por el jugador
+     * @return Un string con caracteres especiales que representaran el numero de fallos
+     *         cometidos.
+     */
     public static String representacionGUIFallos(int fallos) {
         StringBuilder resultado = new StringBuilder(fallosPermitidos);
+        
+        // Agregamos los fallos cometidos
         resultado.append(repetirCaracter((char)9679, fallos));
+        
+        // Agregamos los intentos restantes
         resultado.append(repetirCaracter((char)9711, (fallosPermitidos - fallos)));
         
         return resultado.toString();
@@ -915,13 +993,13 @@ public class Practica2 {
     public static String cogerHorca(int errores, int padding) {
         StringBuilder resultado = new StringBuilder();
         
-        char cabeza = (char)9785;
-        char horcaIzquierda = (char)9615;
-        char horcaSuperior = (char)9620;
-        char cuerda = (char)9591;
-        char cuerpo = (char)9474;
-        char manoIzquierda = '\\';
-        char manoDerecha = '/';
+        char cabeza = (char)9785; // Caracter que representara la cabeza
+        char horcaIzquierda = (char)9615; // Caracter que representara la parte izquierda de la horca
+        char horcaSuperior = (char)9620; // Caracter que representara la parte superior de la horca
+        char cuerda = (char)9591; // Caracter que representara la cuerda de la horca
+        char cuerpo = (char)9474; // Caracter que representara el cuerpo del muñeco
+        char manoIzquierda = '\\'; // Caracter que representara la mano y pierna izquierda del muñeco
+        char manoDerecha = '/'; // Caracter que representara la mano y pierna derecha del muñeco
         
         // cabeza
         if(errores >= 1) {
@@ -983,10 +1061,31 @@ public class Practica2 {
         return resultado;
     }    
     
+    /**
+     * Dibujamos un texto utilizando un ASCII Art.
+     * Este texto puede ser "Has ganado" o "Game Over" segun el estado indicado.
+     * Para crear una simulacion de animacion imprimimos el texto mediante un bucle.
+     * Para que el efecto sea mas real al final de cada bucle "dormimos" el hilo actual
+     * para 500ms.
+     * 
+     * @param status El texto que deseamos que se muestre. Puede ser "Ganas" o "Pierdes"
+     * @param cantidadDeParpadeos La cantidad de veces que querremos que el texto parpadee
+     */
     public static void dibujaTexto(String status, int cantidadDeParpadeos) {
         dibujaTexto(status, "", cantidadDeParpadeos);
     }
     
+    /**
+     * Dibujamos un texto utilizando un ASCII Art.
+     * Este texto puede ser "Has ganado" o "Game Over" segun el estado indicado.
+     * Para crear una simulacion de animacion imprimimos el texto mediante un bucle.
+     * Para que el efecto sea mas real al final de cada bucle "dormimos" el hilo actual
+     * para 500ms.
+     * 
+     * @param status El texto que deseamos que se muestre. Puede ser "Ganas" o "Pierdes"
+     * @param cantidadDeParpadeos La cantidad de veces que querremos que el texto parpadee
+     * @param textoAdicional Representara un texto adicional que aparecera en la parte izquierda superior del texto ASCII Art.
+     */
     public static void dibujaTexto(String status, String textoAdicional, int cantidadDeParpadeos) {
         String textoGanas = "  _    _                _____                       _       \n" +
                             " | |  | |              / ____|                     | |      \n" +
@@ -1005,6 +1104,9 @@ public class Practica2 {
         
         String texto = "";
         
+        /**
+         * Indicamos que texto se tiene que mostrar
+         */
         switch (status) {
             case "Ganas": texto = textoGanas; break;
             case "Pierdes": texto = textoPierdes; break;
@@ -1018,23 +1120,36 @@ public class Practica2 {
                 System.out.println(textoAdicional);
                 System.out.println(texto);
             } else {
+                // Limpiamos la pantalla de este forma se 
+                // va a crear un efecto de parpadeo ( el texto desaparece )
                 limpiarPantalla();
             }
             
+            // Dormimos el hilo para 500ms
             try {
                 Thread.sleep(500);
             }catch(Exception e) { }
         }
     }
     
+    /**
+     * El metodo dibuja el "logo" del juego.
+     * El "logo" es representado por un texto en forma de ASCII Art, que se mueve a la derecha
+     * mediante la insertacion de nuevos espacion en la parte izquierda del texto. Se crea un efecto mas creible
+     * dormiendo el hilo para 300ms.
+     */
     public static void dibujarLogo() {
         String[] texto = new String[5];
                 
-                       texto[0] = "    ___    __                              __    ";
-                       texto[1] = "   /   |  / /_  ____  ______________ _____/ /___ ";
-                       texto[2] = "  / /| | / __ \\/ __ \\/ ___/ ___/ __ `/ __  / __ \\";
-                       texto[3] = " / ___ |/ / / / /_/ / /  / /__/ /_/ / /_/ / /_/ /";
-                       texto[4] = "/_/  |_/_/ /_/\\____/_/   \\___/\\__,_/\\__,_/\\____/";
+        /**
+         * Asignamos cada linea del texto representado en ASCII art a un elemento de un vector
+         * para poder, posteriormente, insertar espacios a cada linea para simular un movimiento del texto.
+         */
+        texto[0] = "    ___    __                              __    ";
+        texto[1] = "   /   |  / /_  ____  ______________ _____/ /___ ";
+        texto[2] = "  / /| | / __ \\/ __ \\/ ___/ ___/ __ `/ __  / __ \\";
+        texto[3] = " / ___ |/ / / / /_/ / /  / /__/ /_/ / /_/ / /_/ /";
+        texto[4] = "/_/  |_/_/ /_/\\____/_/   \\___/\\__,_/\\__,_/\\____/";
                        
         for (int i = 0; i < 10; i++) {
         
