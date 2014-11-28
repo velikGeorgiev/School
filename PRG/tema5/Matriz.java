@@ -36,11 +36,16 @@ public class Matriz {
         } while(true);*/
         
         //imprimirMatriz(matriz);
-        int[][] nMatriz = matrizIdentidad(10);
+        int[][] nMatriz = {
+            {-8,-1,3},
+            {-1,7,4},
+            {3,4,9},
+        };
         System.out.println("");
-        imprimirMatriz(nMatriz);        
+        esSimetrica(nMatriz);        
     }
 
+    /** D **/
     public static int[][] matrizIdentidad(int size) {
         int[][] matriz = new int[size][size];
         
@@ -57,6 +62,7 @@ public class Matriz {
         return matriz;
     }
     
+    /** A **/
     public static int[][] generarMatriz(int x, int y) {
         int[][] matriz = new int[x][y];
         Random rand = new Random();
@@ -70,6 +76,7 @@ public class Matriz {
         return matriz;
     }
 
+    /** B **/
     public static void imprimirMatriz(int[][] matriz) {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
@@ -80,6 +87,7 @@ public class Matriz {
         }
     }
 
+    /** C **/
     public static int[][] sumaMatrices(int[][] matrizUno, int[][] matrizDos) {
         int[][] matrizResultado = new int[matrizUno.length][matrizUno[0].length];
 
@@ -92,6 +100,7 @@ public class Matriz {
         return matrizResultado;
     }
 
+    /** F **/
     public static int[][] matrizInvertida(int[][] matriz) {
         int[][] resultado = new int[matriz[0].length][matriz.length];
 
@@ -104,6 +113,7 @@ public class Matriz {
         return resultado;
     }
     
+    /** G **/
     public static int[][] matrizTranspuesta(int[][] matriz) {
         int[][] resultado = new int[matriz[0].length][matriz.length];
 
@@ -114,5 +124,26 @@ public class Matriz {
         }
 
         return resultado;
+    }
+    
+    /** E **/ 
+    public static boolean esSimetrica(int[][] matriz) {
+        for (int i = 0; i < matriz.length; i++) {
+            if(matriz[i].length != matriz.length){
+                return false;
+            }
+        }
+        
+        int[][] matrizTranspuesta = matrizTranspuesta(matriz);
+        
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                if(matriz[i][j] != matrizTranspuesta[i][j]) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
     }
 }
