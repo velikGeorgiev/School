@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>LTP Tests</title>
+
+		<script>
+			function LTPExample() {
+				var name = "";
+
+				this.getName = function () {
+					return name;
+				}
+			}
+
+			var ltp123 = new LTPExample();
+	        var functionList = [];
+
+			function isFunction(functionToCheck) {
+	            var getType = {};
+	            return functionToCheck && getType.toString.call(functionToCheck) == '[object Function]';
+	        }
+
+	        for(var it in this)  {
+	        	if(isFunction(this[it]) && !/\[native code\]/.test(this[it].toString())) {
+	        		functionList.push(it);
+	            } else if (this[it] != null && !this[it].toString().startsWith("f")) {
+	         		if (typeof this[it] == "object" && functionList.indexOf(this[it].constructor.name) > -1)
+	         			console.log(it + " is an instance of " + this[it].constructor.name);
+	            }
+	        }
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
