@@ -13,23 +13,23 @@
 				}
 			}
 
-		var ltp123 = new LTPExample();
-	        var functionList = [];
+			var ltp123 = new LTPExample();
+			var functionList = [];
 
-		function isFunction(functionToCheck) {
-	            var getType = {};
-	            return functionToCheck && getType.toString.call(functionToCheck) == '[object Function]';
-	        }
+			function isFunction(functionToCheck) {
+			    var getType = {};
+			    return functionToCheck && getType.toString.call(functionToCheck) == '[object Function]';
+			}
 
-	        for(var it in this)  {
-	        	if(isFunction(this[it]) && !/\[native code\]/.test(this[it].toString())) {
-	        		functionList.push(it);
-	            } else if (this[it] != null && !this[it].toString().startsWith("f")) {
-	         		if (typeof this[it] == "object" && functionList.indexOf(this[it].constructor.name) > -1)
-	         			console.log(it + " is an instance of " + this[it].constructor.name);
-	            }
-	        }
-			
+			for(var it in this)  {
+				if(isFunction(this[it]) && !/\[native code\]/.test(this[it].toString())) {
+					functionList.push(it);
+			    } else if (this[it] != null && !this[it].toString().startsWith("f")) {
+					if (typeof this[it] == "object" && functionList.indexOf(this[it].constructor.name) > -1)
+						console.log(it + " is an instance of " + this[it].constructor.name);
+			    }
+			}
+
 		</script>
 	</head>
 	<body>
